@@ -125,7 +125,15 @@ class wcm_actions {
   
   public static function app_scripts(){
      
-     wp_enqueue_script( 'gmailer-app-js', WCM_PLUGIN_URL . '/js/gmailer-app.js', array( 'vue-js' ), false, true );
+    
+    wp_enqueue_script( 'gmailer-dasboard-js', WCM_PLUGIN_URL . '/js/dasboard.js', array( 'vue-js' ), false, true );
+    
+    wp_enqueue_script( 'gmailer-app-js', WCM_PLUGIN_URL . '/js/gmailer-app.js', 
+      array( 
+        'vue-js',
+        'gmailer-dasboard-js'
+      ),
+      false, true );
     
     add_action('wp_head', 'wcm_actions::app_templates', 9);
   }

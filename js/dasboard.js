@@ -1,4 +1,4 @@
-Vue.component('gmailer-dashboard', {
+let Gmailer_Dashboard = {
   template: '#templates-dasboard',
    
   props: [],
@@ -12,4 +12,4 @@ Vue.component('gmailer-dashboard', {
   mounted: function(){},
    
   methods : {}
-});
+};
