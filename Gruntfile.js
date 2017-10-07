@@ -9,7 +9,7 @@ module.exports = function(grunt) {
       basic_and_extras: {
         files: {
          
-          'dist/js/app.js': ['js/a.js', 'js/b.js', 'js/c.js', 'js/d.js'], 
+          'dist/js/app.js': ['js/gmailer-app.js'], 
          // 'dist/css/app.min.css': ['dist/css/app.min.css', 'dist/css/header-generic.min.css'], 
         },
       },

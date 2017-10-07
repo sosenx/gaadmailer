@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,kBAAkB;AAElB,eAAe;EACd,KAAK,EAAC,MAAM;EACb,MAAM,EAAE,cAAc;;AACpB,iBAAC;EACC,eAAe,EAAE,OAAO",
-"sources": ["../sass/header-generic.scss"],
-"names": [],
-"file": "header-generic.css"
-}
