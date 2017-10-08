@@ -1,3 +1,18 @@
+var Gmailer_Dashboard = {
+  template: '#templates-dasboard',
+   
+  props: [],
+  
+  data: function(){
+    return {}
+  },
+  
+  created: function(){},
+    
+  mounted: function(){},
+   
+  methods : {}
+};
 
 // 2. Define some routes
 // Each route should map to a component. The "component" can

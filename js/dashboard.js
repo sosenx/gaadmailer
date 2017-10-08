@@ -1,4 +1,4 @@
-let Gmailer_Dashboard = {
+var Gmailer_Dashboard = {
   template: '#templates-dasboard',
    
   props: [],
