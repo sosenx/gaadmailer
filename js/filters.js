@@ -1,5 +1,5 @@
-var Gmailer_UploadCSV = { 
-  template: '#templates-upload-csv',
+var Gmailer_Filters = { 
+  template: '#templates-filters',
    
   props: [],
    

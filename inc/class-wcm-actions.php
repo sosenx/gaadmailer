@@ -125,7 +125,16 @@ class wcm_actions {
   
   
   public static function common_styles(){
-     wp_enqueue_style( 'gmailer-app-css', WCM_PLUGIN_URL . '/css/gmailer-app.css', false, false);
+    if(  GMAILER_ENV === 'DEV' ){
+      wp_enqueue_style( 'gmailer-app-css', WCM_PLUGIN_URL . '/css/gmailer-app.css', false, false);
+      wp_enqueue_style( 'gmailer-upload-csv-css', WCM_PLUGIN_URL . '/css/upload-csv.css', false, false);
+      
+    }
+    
+    if(  GMAILER_ENV === 'DIST' ){
+      wp_enqueue_style( 'gmailer-upload-csv-css', WCM_PLUGIN_URL . '/dist/css/app.min.css', false, false);
+    }
+     
     
   }
   
@@ -141,14 +150,14 @@ class wcm_actions {
         ),
         false, true );
 
-      add_action('wp_head', 'wcm_actions::app_templates', 9);
+      
      } 
     
     if(  GMAILER_ENV === 'DIST' ){
       wp_enqueue_script( 'gmailer-app-dist-js', WCM_PLUGIN_URL . '/dist/js/app.js', array( 'vue-js' ), false, true );    
     } 
     
-    
+    add_action('wp_head', 'wcm_actions::app_templates', 9);
   }
   
   public static function common_scripts(){

@@ -13,6 +13,96 @@ var Gmailer_Dashboard = {
    
   methods : {}
 };
+var Gmailer_UploadCSV = { 
+  template: '#templates-upload-csv',
+   
+  props: [],
+   
+  data: function(){
+    return {} 
+  },
+  
+  created: function(){},
+      
+  mounted: function(){},
+   
+  methods : {}
+};
+var Gmailer_Filters = { 
+  template: '#templates-filters',
+   
+  props: [],
+   
+  data: function(){
+    return {} 
+  },
+  
+  created: function(){},
+      
+  mounted: function(){},
+   
+  methods : {}
+};
+var Gmailer_Templates = { 
+  template: '#templates-templates',
+   
+  props: [], 
+   
+  data: function(){
+    return {} 
+  },
+  
+  created: function(){},
+      
+  mounted: function(){},
+   
+  methods : {}
+};
+var Gmailer_Archives = { 
+  template: '#templates-archives',
+   
+  props: [],
+   
+  data: function(){
+    return {} 
+  },
+  
+  created: function(){},
+      
+  mounted: function(){},
+   
+  methods : {}
+};
+var Gmailer_Outbox = { 
+  template: '#templates-outbox',
+   
+  props: [],
+   
+  data: function(){
+    return {} 
+  },
+  
+  created: function(){},
+      
+  mounted: function(){},
+   
+  methods : {}
+};
+var Gmailer_Send = { 
+  template: '#templates-send',
+   
+  props: [],
+   
+  data: function(){
+    return {} 
+  },
+  
+  created: function(){},
+      
+  mounted: function(){},
+   
+  methods : {}
+};
 
 // 2. Define some routes
 // Each route should map to a component. The "component" can
@@ -20,7 +110,14 @@ var Gmailer_Dashboard = {
 // `Vue.extend()`, or just a component options object.
 // We'll talk about nested routes later.
 var  routes = [
-  { path: '/', component: Gmailer_Dashboard },  
+  { path: '/', component: Gmailer_Dashboard , name: 'test24'},  
+  { path: '/upload-csv', component: Gmailer_UploadCSV },
+  { path: '/filters', component: Gmailer_Filters },
+  { path: '/templates', component: Gmailer_Templates },
+  { path: '/archives', component: Gmailer_Archives },
+  { path: '/outbox', component: Gmailer_Outbox },
+  { path: '/send', component: Gmailer_Send }
+  
 ];
 
 // 3. Create the router instance and pass the `routes` option
