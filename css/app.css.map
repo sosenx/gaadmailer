@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,kBAAkB;AAClB,YAAY;EACV,gBAAgB,EAAE,YAAY",
+"sources": ["../sass/gmailer-app.scss"],
+"names": [],
+"file": "app.css"
+}
