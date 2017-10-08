@@ -13,6 +13,7 @@ var Gmailer_Dashboard = {
    
   methods : {}
 };
+<<<<<<< HEAD
 var Gmailer_UploadCSV = {
   template: '#templates-upload-csv',
    
@@ -24,6 +25,94 @@ var Gmailer_UploadCSV = {
   
   created: function(){},
     
+=======
+var Gmailer_UploadCSV = { 
+  template: '#templates-upload-csv',
+   
+  props: [],
+   
+  data: function(){
+    return {} 
+  },
+  
+  created: function(){},
+      
+  mounted: function(){},
+   
+  methods : {}
+};
+var Gmailer_Filters = { 
+  template: '#templates-filters',
+   
+  props: [],
+   
+  data: function(){
+    return {} 
+  },
+  
+  created: function(){},
+      
+  mounted: function(){},
+   
+  methods : {}
+};
+var Gmailer_Templates = { 
+  template: '#templates-templates',
+   
+  props: [], 
+   
+  data: function(){
+    return {} 
+  },
+  
+  created: function(){},
+      
+  mounted: function(){},
+   
+  methods : {}
+};
+var Gmailer_Archives = { 
+  template: '#templates-archives',
+   
+  props: [],
+   
+  data: function(){
+    return {} 
+  },
+  
+  created: function(){},
+      
+  mounted: function(){},
+   
+  methods : {}
+};
+var Gmailer_Outbox = { 
+  template: '#templates-outbox',
+   
+  props: [],
+   
+  data: function(){
+    return {} 
+  },
+  
+  created: function(){},
+      
+  mounted: function(){},
+   
+  methods : {}
+};
+var Gmailer_Send = { 
+  template: '#templates-send',
+   
+  props: [],
+   
+  data: function(){
+    return {} 
+  },
+  
+  created: function(){},
+      
+>>>>>>> env
   mounted: function(){},
    
   methods : {}
@@ -37,11 +126,19 @@ var Gmailer_UploadCSV = {
 var  routes = [
   { path: '/', component: Gmailer_Dashboard , name: 'test24'},  
   { path: '/upload-csv', component: Gmailer_UploadCSV },
+<<<<<<< HEAD
   /*{ path: '/filters', component: Gmailer_Filters },
   { path: '/templates', component: Gmailer_Tempaltes },
   { path: '/archives', component: Gmailer_Archives },
   { path: '/outbox', component: Gmailer_Outbox },
   { path: '/send', component: Gmailer_Send }*/
+=======
+  { path: '/filters', component: Gmailer_Filters },
+  { path: '/templates', component: Gmailer_Templates },
+  { path: '/archives', component: Gmailer_Archives },
+  { path: '/outbox', component: Gmailer_Outbox },
+  { path: '/send', component: Gmailer_Send }
+>>>>>>> env
   
 ];
 

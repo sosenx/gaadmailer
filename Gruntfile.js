@@ -12,6 +12,14 @@ module.exports = function(grunt) {
           'dist/js/app.js': [
               'js/dashboard.js',
               'js/upload-csv.js',
+<<<<<<< HEAD
+=======
+              'js/filters.js',
+              'js/templates.js', 
+              'js/archives.js', 
+              'js/outbox.js', 
+              'js/send.js', 
+>>>>>>> env
               'js/gmailer-app.js'
             ], 
          // 'dist/css/app.min.css': ['dist/css/app.min.css', 'dist/css/header-generic.min.css'], 

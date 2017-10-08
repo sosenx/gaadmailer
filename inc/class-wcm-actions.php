@@ -125,22 +125,44 @@ class wcm_actions {
   
   
   public static function common_styles(){
-     wp_enqueue_style( 'gmailer-app-css', WCM_PLUGIN_URL . '/css/gmailer-app.css', false, false);
+    if(  GMAILER_ENV === 'DEV' ){
+      wp_enqueue_style( 'gmailer-app-css', WCM_PLUGIN_URL . '/css/gmailer-app.css', false, false);
+      wp_enqueue_style( 'gmailer-upload-csv-css', WCM_PLUGIN_URL . '/css/upload-csv.css', false, false);
+      
+    }
+    
+    if(  GMAILER_ENV === 'DIST' ){
+      wp_enqueue_style( 'gmailer-upload-csv-css', WCM_PLUGIN_URL . '/dist/css/app.min.css', false, false);
+    }
+     
     
   }
   
   public static function app_scripts(){
+<<<<<<< HEAD
      
    
     wp_enqueue_script( 'gmailer-dasboard-js', WCM_PLUGIN_URL . '/js/dasboard.js', array( 'vue-js' ), false, true );
     wp_enqueue_script( 'gmailer-upload-csv-js', WCM_PLUGIN_URL . '/js/upload-csv.js', array( 'vue-js' ), false, true );
+=======
+    if(  GMAILER_ENV === 'DEV' ){
+      wp_enqueue_script( 'gmailer-dasboard-js', WCM_PLUGIN_URL . '/js/dasboard.js', array( 'vue-js' ), false, true );
+      wp_enqueue_script( 'gmailer-upload-csv-js', WCM_PLUGIN_URL . '/js/upload-csv.js', array( 'vue-js' ), false, true );
+
+      wp_enqueue_script( 'gmailer-app-js', WCM_PLUGIN_URL . '/js/gmailer-app.js', 
+        array( 
+          'vue-js',
+          'gmailer-dasboard-js'
+        ),
+        false, true );
+
+      
+     } 
+>>>>>>> env
     
-    wp_enqueue_script( 'gmailer-app-js', WCM_PLUGIN_URL . '/js/gmailer-app.js', 
-      array( 
-        'vue-js',
-        'gmailer-dasboard-js'
-      ),
-      false, true );
+    if(  GMAILER_ENV === 'DIST' ){
+      wp_enqueue_script( 'gmailer-app-dist-js', WCM_PLUGIN_URL . '/dist/js/app.js', array( 'vue-js' ), false, true );    
+    } 
     
     add_action('wp_head', 'wcm_actions::app_templates', 9);
   }

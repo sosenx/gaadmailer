@@ -7,11 +7,16 @@
 var  routes = [
   { path: '/', component: Gmailer_Dashboard , name: 'test24'},  
   { path: '/upload-csv', component: Gmailer_UploadCSV },
+<<<<<<< HEAD
   /*{ path: '/filters', component: Gmailer_Filters },
   { path: '/templates', component: Gmailer_Tempaltes },
+=======
+  { path: '/filters', component: Gmailer_Filters },
+  { path: '/templates', component: Gmailer_Templates },
+>>>>>>> env
   { path: '/archives', component: Gmailer_Archives },
   { path: '/outbox', component: Gmailer_Outbox },
-  { path: '/send', component: Gmailer_Send }*/
+  { path: '/send', component: Gmailer_Send }
   
 ];
 
