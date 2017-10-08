@@ -131,8 +131,9 @@ class wcm_actions {
   
   public static function app_scripts(){
      
-    
+   
     wp_enqueue_script( 'gmailer-dasboard-js', WCM_PLUGIN_URL . '/js/dasboard.js', array( 'vue-js' ), false, true );
+    wp_enqueue_script( 'gmailer-upload-csv-js', WCM_PLUGIN_URL . '/js/upload-csv.js', array( 'vue-js' ), false, true );
     
     wp_enqueue_script( 'gmailer-app-js', WCM_PLUGIN_URL . '/js/gmailer-app.js', 
       array( 

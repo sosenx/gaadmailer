@@ -6,8 +6,8 @@
 // We'll talk about nested routes later.
 var  routes = [
   { path: '/', component: Gmailer_Dashboard , name: 'test24'},  
- /* { path: '/upload-csv', component: Gmailer_UploadCSV },
-  { path: '/filters', component: Gmailer_Filters },
+  { path: '/upload-csv', component: Gmailer_UploadCSV },
+  /*{ path: '/filters', component: Gmailer_Filters },
   { path: '/templates', component: Gmailer_Tempaltes },
   { path: '/archives', component: Gmailer_Archives },
   { path: '/outbox', component: Gmailer_Outbox },
