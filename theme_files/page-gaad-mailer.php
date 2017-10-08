@@ -21,7 +21,7 @@
       <div class="row">
         <div class="col-4">
           <ul>
-            <li><router-link :name="test23" to="/"><?php _e( 'Dashboard', 'gaad-mailer' ); ?></router-link></li>
+            <li><router-link to="/"><?php _e( 'Dashboard', 'gaad-mailer' ); ?></router-link></li>
             <li><router-link to="/upload-csv"><?php _e( 'Upload CSV', 'gaad-mailer' ); ?></router-link></li>
             <li><router-link to="/filters"><?php _e( 'Filters', 'gaad-mailer' ); ?></router-link></li>
             <li><router-link to="/templates"><?php _e( 'Mail templates', 'gaad-mailer' ); ?></router-link></li>

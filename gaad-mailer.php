@@ -33,8 +33,7 @@ require_once( 'inc/class-wcm-filters.php' );
 require_once( 'inc/class-wcm-actions.php' );
 require_once( 'class/class-rest-api.php' );  
 require_once( 'inc/class-wcm-admin-actions.php' );
-
-
+require_once( 'vendor/autoload.php' );
 
 
 
@@ -53,6 +52,12 @@ $core_hooks->add_hook( 'filter', array('style_loader_src', 'script_loader_src'),
 //defer
 $core_hooks->add_hook( 'filter', array('script_loader_tag' ), array( 'wcm_filters::add_defer_attribute', 10, 2 ) );
 $core_hooks->add_hook( 'filter', array('clean_url' ), array( 'wcm_admin_actions::ikreativ_async_scripts', 11, 1) );
+
+
+//ajax
+//$core_hooks->add_hook( 'action', 'wp_ajax_nopriv_', array('wcm_actions::', 10, 0, true));
+//$core_hooks->add_hook( 'action', 'wp_ajax_', array('wcm_actions::', 10, 0, true));
+
 
 $core_hooks->apply_hooks();
 
