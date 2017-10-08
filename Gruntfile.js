@@ -12,14 +12,12 @@ module.exports = function(grunt) {
           'dist/js/app.js': [
               'js/dashboard.js',
               'js/upload-csv.js',
-<<<<<<< HEAD
-=======
               'js/filters.js',
               'js/templates.js', 
               'js/archives.js', 
               'js/outbox.js', 
               'js/send.js', 
->>>>>>> env
+
               'js/gmailer-app.js'
             ], 
          // 'dist/css/app.min.css': ['dist/css/app.min.css', 'dist/css/header-generic.min.css'], 
@@ -31,7 +29,7 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       build: {
-        src: 'dist/js/*',
+        src: 'dist/js/*.js',
         dest: 'dist/js/app.min.js'
       }
     },
@@ -80,6 +78,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');  
   //grunt.loadNpmTasks('grunt-contrib-compress');
   // Default task(s).
-  grunt.registerTask('default', [ 'sass', 'concat', /*'uglify', */'cssmin' ]);
+  grunt.registerTask('default', [ 'sass', 'concat', 'uglify', /**/'cssmin' ]);
 
 };
