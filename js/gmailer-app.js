@@ -5,7 +5,14 @@
 // `Vue.extend()`, or just a component options object.
 // We'll talk about nested routes later.
 var  routes = [
-  { path: '/', component: Gmailer_Dashboard },  
+  { path: '/', component: Gmailer_Dashboard , name: 'test24'},  
+ /* { path: '/upload-csv', component: Gmailer_UploadCSV },
+  { path: '/filters', component: Gmailer_Filters },
+  { path: '/templates', component: Gmailer_Tempaltes },
+  { path: '/archives', component: Gmailer_Archives },
+  { path: '/outbox', component: Gmailer_Outbox },
+  { path: '/send', component: Gmailer_Send }*/
+  
 ];
 
 // 3. Create the router instance and pass the `routes` option

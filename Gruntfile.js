@@ -71,6 +71,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');  
   //grunt.loadNpmTasks('grunt-contrib-compress');
   // Default task(s).
-  grunt.registerTask('default', [ 'sass', 'concat', 'uglify', 'cssmin' ]);
+  grunt.registerTask('default', [ 'sass', 'concat', /*'uglify', */'cssmin' ]);
 
 };
