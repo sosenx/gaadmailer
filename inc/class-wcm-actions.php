@@ -130,18 +130,25 @@ class wcm_actions {
   }
   
   public static function app_scripts(){
-     
+    if(  GMAILER_ENV === 'DEV' ){
+      wp_enqueue_script( 'gmailer-dasboard-js', WCM_PLUGIN_URL . '/js/dasboard.js', array( 'vue-js' ), false, true );
+      wp_enqueue_script( 'gmailer-upload-csv-js', WCM_PLUGIN_URL . '/js/upload-csv.js', array( 'vue-js' ), false, true );
+
+      wp_enqueue_script( 'gmailer-app-js', WCM_PLUGIN_URL . '/js/gmailer-app.js', 
+        array( 
+          'vue-js',
+          'gmailer-dasboard-js'
+        ),
+        false, true );
+
+      add_action('wp_head', 'wcm_actions::app_templates', 9);
+     } 
     
-    wp_enqueue_script( 'gmailer-dasboard-js', WCM_PLUGIN_URL . '/js/dasboard.js', array( 'vue-js' ), false, true );
+    if(  GMAILER_ENV === 'DIST' ){
+      wp_enqueue_script( 'gmailer-app-dist-js', WCM_PLUGIN_URL . '/dist/js/app.js', array( 'vue-js' ), false, true );    
+    } 
     
-    wp_enqueue_script( 'gmailer-app-js', WCM_PLUGIN_URL . '/js/gmailer-app.js', 
-      array( 
-        'vue-js',
-        'gmailer-dasboard-js'
-      ),
-      false, true );
     
-    add_action('wp_head', 'wcm_actions::app_templates', 9);
   }
   
   public static function common_scripts(){
