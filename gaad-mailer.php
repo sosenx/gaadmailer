@@ -19,11 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 ini_set('max_execution_time', 60*10); //10 minutes
 
 if ( !defined( 'WPLANG'))                         define( 'WPLANG',                       'pl_PL' );
-<<<<<<< HEAD
-if ( !defined( 'GMAILER_ENV'))                    define( 'GMAILER_ENV',                  'DEV' );
-=======
 if ( !defined( 'GMAILER_ENV'))                    define( 'GMAILER_ENV',                  'DIST' );
->>>>>>> env
+
 if ( !defined( 'WCM_PLUGIN_NAME'))                define( 'WCM_PLUGIN_NAME',              trim(dirname(plugin_basename(__FILE__)), '/') );
 if ( !defined( 'GMAILER_DIR' ) )                  define( 'GMAILER_DIR',                  plugin_dir_path( __FILE__) );
 if ( !defined( 'GMAILER_THEME_FILES_DIR' ) )      define( 'GMAILER_THEME_FILES_DIR',      GMAILER_DIR . 'theme_files' );
