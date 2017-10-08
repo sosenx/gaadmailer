@@ -1,107 +1,33 @@
-(function($, w){
-	
-	var GBOX_SLUG = function( args ){
-		
-		this.args = args;
-		
-		
-		this.set = function(){
-			return this;
-		}	
-				
-		this.init = function( ){			
-			this.$el = $( '#' + this.args.model.instance_id );
-			
-			this.set();
-			return this;
-		}
-		
-		return this;
-	}
+// 1. Define route components.
+// These can be imported from other files
+let Foo = { template: '<div>foo</div>' }
+let Bar = { template: '<div>bar</div>' }
 
-	
-	
-	w.GBOX_SLUG = GBOX_SLUG1 ;
-	
-})(jQuery, window);
+// 2. Define some routes
+// Each route should map to a component. The "component" can
+// either be an actual component constructor created via
+// `Vue.extend()`, or just a component options object.
+// We'll talk about nested routes later.
+let routes = [
+  { path: '/', component: Gmailer_Dashboard },
+  { path: '/bar', component: Bar }
+]
 
-(function($, w){
-	
-	var GBOX_SLUG = function( args ){
-		
-		this.args = args;
-		
-		
-		this.set = function(){
-			return this;
-		}	
-				
-		this.init = function( ){			
-			this.$el = $( '#' + this.args.model.instance_id );
-			
-			this.set();
-			return this;
-		}
-		
-		return this;
-	}
+// 3. Create the router instance and pass the `routes` option
+// You can pass in additional options here, but let's
+// keep it simple for now.
+let router = new VueRouter({
+  routes // short for `routes: routes`
+})
 
-	
-	
-	w.GBOX_SLUG = GBOX_SLUG;
-	
-})(jQuery, window);
+// 4. Create and mount the root instance.
+// Make sure to inject the router with the router option to make the
+// whole app router-aware.
+let app = new Vue({
+  router
+}).$mount('#gmailer-app')
 
-(function($, w){
-	
-	var GBOX_SLUG = function( args ){
-		
-		this.args = args;
-		
-		
-		this.set = function(){
-			return this;
-		}	
-				
-		this.init = function( ){			
-			this.$el = $( '#' + this.args.model.instance_id );
-			
-			this.set();
-			return this;
-		}
-		
-		return this;
-	}
+// Now the app has started!
 
-	
-	
-	w.GBOX_SLUG = GBOX_SLUG;
-	
-})(jQuery, window);
 
-(function($, w){
-	
-	var GBOX_SLUG = function( args ){
-		
-		this.args = args;
-		
-		
-		this.set = function(){
-			return this;
-		}	
-				
-		this.init = function( ){			
-			this.$el = $( '#' + this.args.model.instance_id );
-			
-			this.set();
-			return this;
-		}
-		
-		return this;
-	}
 
-	
-	
-	w.GBOX_SLUG = GBOX_SLUG;
-	
-})(jQuery, window);
