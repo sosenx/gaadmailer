@@ -3,7 +3,13 @@
    
 class wcm_actions {
   
-
+  
+  public static function localisation(){
+    $languages_dir = dirname( dirname( plugin_basename(__FILE__))) .'/languages/';
+    load_plugin_textdomain('gaad-mailer', false, $languages_dir );    
+    return true;
+  }
+  
   /**
   * Copy a file, or recursively copy a folder and its contents
   * @author      Aidan Lister <aidan@php.net>

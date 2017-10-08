@@ -1,5 +1,5 @@
 <div id="dasboard">
   
-  gaad dasboard mailer
+  <?php _e( 'gaad dasboard mailer', 'gaad-mailer' ) ?>
   
 </div>

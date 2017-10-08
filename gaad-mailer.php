@@ -1,6 +1,7 @@
 <?php 
 /*
  * Plugin Name: Gaad mailer
+ * Text Domain: gaad-mailer
  * Version: 1.0
  * Plugin URI: 
  * Description: Simple mailer with CSV to DB import
@@ -17,6 +18,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 ini_set('max_execution_time', 60*10); //10 minutes
 
+if ( !defined( 'WPLANG'))                         define( 'WPLANG',                       'pl_PL' );
 if ( !defined( 'WCM_PLUGIN_NAME'))                define( 'WCM_PLUGIN_NAME',              trim(dirname(plugin_basename(__FILE__)), '/') );
 if ( !defined( 'GMAILER_DIR' ) )                  define( 'GMAILER_DIR',                  plugin_dir_path( __FILE__) );
 if ( !defined( 'GMAILER_THEME_FILES_DIR' ) )      define( 'GMAILER_THEME_FILES_DIR',      GMAILER_DIR . 'theme_files' );
@@ -35,11 +37,14 @@ require_once( 'inc/class-wcm-admin-actions.php' );
 
 
 
+
+
 $core_hooks = new wcm_hooks_mng( 'core' );
 $core_hooks->add_hook( 'action', 'wp_enqueue_scripts', array('wcm_actions::core_scripts', 10, 0, true));
 $core_hooks->add_hook( 'action', 'wp_enqueue_scripts', array('wcm_actions::common_scripts', 10, 0, true));
 $core_hooks->add_hook( 'action', 'wp_enqueue_scripts', array('wcm_actions::app_scripts', 10, 0, true));
 $core_hooks->add_hook( 'action', 'wp_enqueue_scripts', 'wcm_actions::core_styles');
+$core_hooks->add_hook( 'action', 'init', array( 'wcm_actions::localisation', 10, 0 ) );
 $core_hooks->add_hook( 'action', 'after_setup_theme', array( 'wcm_actions::update_theme_files', 10, 0 ) );
 $core_hooks->add_hook( 'action', 'wp_enqueue_scripts', 'wcm_actions::common_styles');
 
