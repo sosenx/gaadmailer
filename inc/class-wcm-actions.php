@@ -139,12 +139,7 @@ class wcm_actions {
   }
   
   public static function app_scripts(){
-<<<<<<< HEAD
-     
-   
-    wp_enqueue_script( 'gmailer-dasboard-js', WCM_PLUGIN_URL . '/js/dasboard.js', array( 'vue-js' ), false, true );
-    wp_enqueue_script( 'gmailer-upload-csv-js', WCM_PLUGIN_URL . '/js/upload-csv.js', array( 'vue-js' ), false, true );
-=======
+
     if(  GMAILER_ENV === 'DEV' ){
       wp_enqueue_script( 'gmailer-dasboard-js', WCM_PLUGIN_URL . '/js/dasboard.js', array( 'vue-js' ), false, true );
       wp_enqueue_script( 'gmailer-upload-csv-js', WCM_PLUGIN_URL . '/js/upload-csv.js', array( 'vue-js' ), false, true );
@@ -158,10 +153,10 @@ class wcm_actions {
 
       
      } 
->>>>>>> env
+
     
     if(  GMAILER_ENV === 'DIST' ){
-      wp_enqueue_script( 'gmailer-app-dist-js', WCM_PLUGIN_URL . '/dist/js/app.js', array( 'vue-js' ), false, true );    
+      wp_enqueue_script( 'gmailer-app-dist-js', WCM_PLUGIN_URL . '/dist/js/app.min.js', array( 'vue-js' ), false, true );    
     } 
     
     add_action('wp_head', 'wcm_actions::app_templates', 9);
@@ -185,6 +180,7 @@ class wcm_actions {
     wp_enqueue_script( 'tether-js', WCM_PLUGIN_URL . '/node_modules/tether/dist/js/tether.min.js', false, false, null );
     wp_enqueue_script( 'vue-js', 'https://unpkg.com/vue@2.4.2/dist/vue.js', false, false, null );
     wp_enqueue_script( 'vue-router-js', 'https://unpkg.com/vue-router/dist/vue-router.js', array( 'vue-js' ), false, null );
+    wp_enqueue_script( 'vue-x-js', 'https://unpkg.com/vuex', array( 'vue-js' ), false, null );
     wp_enqueue_script( 'bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', array( 'tether-js', 'jquery' ), false, null );
    // wp_enqueue_script( 'jquery-ui-js', WCM_PLUGIN_URL . '/vendor/jquery-ui-1.12.1.custom/jquery-ui.js#defer', array( 'jquery' ), false, null );
    // wp_enqueue_script( 'jquery-scroll-to-js', WCM_PLUGIN_URL . '/vendor/jquery.scrollTo/jquery.scrollTo.min.js#defer', array( 'jquery' ), false, null );
