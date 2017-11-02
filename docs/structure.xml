@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project title="GAAD MAILER" version="2.8.5">
+  <partials/>
+  <file path="class-wcm-actions.php" generated-path="class-wcm-actions.html" hash="9b17064e23034b3f1a7781cdca05d7df" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="Default"/>
+    </docblock>
+    <class final="false" abstract="false" namespace="" line="4" package="Default">
+      <extends/>
+      <name>wcm_actions</name>
+      <full_name>\wcm_actions</full_name>
+      <docblock line="4">
+        <description></description>
+        <long-description></long-description>
+        <tag name="package" line="4" description="Default"/>
+      </docblock>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="7" package="Default">
+        <name>localisation</name>
+        <full_name>\wcm_actions::localisation()</full_name>
+        <docblock line="7">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="23" package="Default">
+        <name>xcopy</name>
+        <full_name>\wcm_actions::xcopy()</full_name>
+        <docblock line="23">
+          <description>Copy a file, or recursively copy a folder and its contents</description>
+          <long-description></long-description>
+          <tag name="author" line="23" description="Aidan Lister" link="mailto:aidan@php.net"/>
+          <tag name="version" line="23" description="1.0.1"/>
+          <tag name="link" line="23" description="http://aidanlister.com/2004/04/recursively-copying-directories-in-php/" link="http://aidanlister.com/2004/04/recursively-copying-directories-in-php/"/>
+          <tag name="param" line="23" description="&lt;p&gt;Source path&lt;/p&gt;" type="string" variable="$source">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="23" description="&lt;p&gt;Destination path&lt;/p&gt;" type="string" variable="$dest">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="23" description="&lt;p&gt;New folder creation permissions&lt;/p&gt;" type="integer" variable="$permissions">
+            <type>integer</type>
+          </tag>
+          <tag name="return" line="23" description="Returns true on success, false on failure" type="boolean">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$source</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$dest</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$permissions</name>
+          <default>493</default>
+          <type>integer</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="61" package="Default">
+        <name>update_theme_files</name>
+        <full_name>\wcm_actions::update_theme_files()</full_name>
+        <docblock line="61">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="77" package="Default">
+        <name>login_user</name>
+        <full_name>\wcm_actions::login_user()</full_name>
+        <docblock line="77">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$username</name>
+          <default>NULL</default>
+          <type/>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$userpwd</name>
+          <default>NULL</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="108" package="Default">
+        <name>app_templates</name>
+        <full_name>\wcm_actions::app_templates()</full_name>
+        <docblock line="108">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="127" package="Default">
+        <name>common_styles</name>
+        <full_name>\wcm_actions::common_styles()</full_name>
+        <docblock line="127">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="141" package="Default">
+        <name>app_scripts</name>
+        <full_name>\wcm_actions::app_scripts()</full_name>
+        <docblock line="141">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="165" package="Default">
+        <name>common_scripts</name>
+        <full_name>\wcm_actions::common_scripts()</full_name>
+        <docblock line="165">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="170" package="Default">
+        <name>test</name>
+        <full_name>\wcm_actions::test()</full_name>
+        <docblock line="170">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="178" package="Default">
+        <name>core_scripts</name>
+        <full_name>\wcm_actions::core_scripts()</full_name>
+        <docblock line="178">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="198" package="Default">
+        <name>core_styles</name>
+        <full_name>\wcm_actions::core_styles()</full_name>
+        <docblock line="198">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="211" package="Default">
+        <name>_constructor</name>
+        <full_name>\wcm_actions::_constructor()</full_name>
+        <docblock line="211">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="4" code="PPC:ERR-50005">No summary for class \wcm_actions</error>
+      <error line="7" code="PPC:ERR-50008">No summary for method localisation()</error>
+      <error line="61" code="PPC:ERR-50008">No summary for method update_theme_files()</error>
+      <error line="77" code="PPC:ERR-50015">Argument $username is missing from the Docblock of login_user</error>
+      <error line="77" code="PPC:ERR-50015">Argument $userpwd is missing from the Docblock of login_user</error>
+      <error line="77" code="PPC:ERR-50008">No summary for method login_user()</error>
+      <error line="108" code="PPC:ERR-50008">No summary for method app_templates()</error>
+      <error line="127" code="PPC:ERR-50008">No summary for method common_styles()</error>
+      <error line="141" code="PPC:ERR-50008">No summary for method app_scripts()</error>
+      <error line="165" code="PPC:ERR-50008">No summary for method common_scripts()</error>
+      <error line="170" code="PPC:ERR-50008">No summary for method test()</error>
+      <error line="178" code="PPC:ERR-50008">No summary for method core_scripts()</error>
+      <error line="198" code="PPC:ERR-50008">No summary for method core_styles()</error>
+      <error line="211" code="PPC:ERR-50008">No summary for method _constructor()</error>
+    </parse_markers>
+    <source>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</source>
+  </file>
+  <file path="upload-file.php" generated-path="upload-file.html" hash="9efa89a2656b9845093c6f5fc3432724" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="Default"/>
+    </docblock>
+    <function namespace="" line="6" package="Default">
+      <name>cleanFiles</name>
+      <full_name>\cleanFiles()</full_name>
+      <docblock line="6">
+        <description></description>
+        <long-description></long-description>
+        <tag name="package" line="6" description="Default"/>
+      </docblock>
+      <argument line="0" by_reference="false">
+        <name>$dir</name>
+        <default></default>
+        <type/>
+      </argument>
+    </function>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="6" code="PPC:ERR-50015">Argument $dir is missing from the Docblock of cleanFiles</error>
+      <error line="6" code="PPC:ERR-50011">No summary for function \cleanFiles()</error>
+    </parse_markers>
+    <source>eJy9V21v00gQ/hz/irkqYm1I7Fa6CkRK+HCUoxLcVS139yFE1mJvkiX2rlnbDVDlv9/si5M1KSBOB1WV2DuzM88887Kbs6fVqgqShGUrCeSsUmxKJmDebqhK87asQvjnt1fp5cu/fr/4I312cQWRUyBnidUPAsXet1yxVIqMhUCSlSxZsi44E02cr2TdcLGMqyJ5W8tayE295smGbuiaFkzkVH1icb7gqqRap2rfFjxLV01ZJJtqnEnRoJmkKtolF3WypDQfb6TMZFkylbFx5oyMS7pmKrnBF6mSa15WBbso6ZIltcqSrKA3vF5TXxBj7ATDwfg/D+AnOV60Imu4FJAVjIrnvGB1CMOcK4huA4BshY/hD6GToHeA4UK7hCewLOTbEKzrGOO/b+DhQkk/oDiTrWgg7PSNaCEVLnCUHk/w+0yr6ocHDwx2APPBFyFglSzTkjbZSlNLYhiml39ev56RiqqGzCEm43FCRs76bMjnEMG9e8DrVK+EfUF0C+4v6B5aUXCx7utNjHS7RxLYt2AbBBrUMH1+8fL8enY8nx0xpaQ6msMTjMUyH1jkHVD2oWFK0OJSyXcs05hRlTSqZcThMS6GFW1WSMgPyVhbM5W2VSFpXicEME07eC3PyTxGamHH7VGG3F40rDwyAsvGsJYtVi4iRGpFWxThbimCpztKkIT5DMMrq1TQEkOcw+NO0RnSRBsh2vpsm9viKzpaLD2xv3uyK5JS3jAXHsu7vFufI99MBK680Pi7Wgqjujfu15fHAQpire2IsC67+trb8Yw782jZSHOWyRwhGSBL1qQuLbpf9zCiEeii6Kqvc/TLnm5js+fGOZod3dCC57oKjY3JoUJXhZWtwu9Q1dwY9T2R/ibv0crbu+MbWS6YMFyY9ciP1bO0Dfrf/pfflFtgRc1+yrDz5x1Vin4MLQY7huDJtKubbmU+svJskxsxph0fQ0zyzl6F01w3vD4E8RVbRr/951ad7EePrhlNiDW6q5hyvVscwfHDhw/9itva7YctasN1mfLGMUni+7M38fz2ZBvG96OhmcLeYNTbj+Yjz5iz0X30zi0DdOJj+B/mzWAQDAZD2jQ0W5WYzJTnZub0M+VNm4tnKG8Ff89zF3GSeBJCJoF3NvG6Zk3o21saAP6YcUkOuWiiA8UpnGAoeILt585eqE82gsEQN3e2lhsMqDdA+9HFxlo3JxF07CCgICa9+Tk7wcgNQ0kiJOB9A2yfsjqjFcP1rpR6A9VGN3Awajzf9AFI9vNkYGwOFGtaJfSrbVMwm5ywUR/h1j4Ovj3AG6qwfXSwukr0FaMfiYE08CZJXTBWhSe96ZIkzUZixwvOoOSCU4T3EaqCr1tPCzPGS5sywTbwpruBvfFuYGHPbrejtwQwni6ULJ+bI8Lij+Cuv4NtitX8EwtPj49HALruo/G0kcYQYPvqeMMdJZFho1mh9tjLu2VlBMQgSyqxxN48PY6+5OzR9/h69G1Xv55GZqbtuf/abwTnYOSIPPyJ4LFlKgjLXea7Gxvp6sbU4BdKxM47nDC2BL3kOSPGtSbDWEE4u4Xw0E80sUDuREBWTVPVjxM3pq/Pr/4+v5qRF69fX6YvsMX1pbX/K2EHtWfqC4fsYdstKLaXRbTVn1vI9IDGK/f5h4xV5jfCEK8nt3czBuRcm8JBgyjYeIqxv2J1bQsdtq6f8Xs3nL/ybzLnH/TetX+Qc9c7wRYv0kHwdPov+YcNgA==</source>
+  </file>
+  <file path="class-wcm-admin-actions.php" generated-path="class-wcm-admin-actions.html" hash="a9b371b77c69a86605c06cd760555db2" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="Default"/>
+    </docblock>
+    <class final="false" abstract="false" namespace="" line="9" package="Default">
+      <extends/>
+      <name>wcm_admin_actions</name>
+      <full_name>\wcm_admin_actions</full_name>
+      <docblock line="9">
+        <description>Akcje administratora</description>
+        <long-description>Klasa zawiera zestaw akcji wykorzystywanych przez UI po stronie administratora.</long-description>
+        <tag name="package" line="9" description="Default"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="13" package="Default">
+        <name>__constructor</name>
+        <full_name>\wcm_admin_actions::__constructor()</full_name>
+        <docblock line="13">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="27" package="Default">
+        <name>ikreativ_async_scripts</name>
+        <full_name>\wcm_admin_actions::ikreativ_async_scripts()</full_name>
+        <docblock line="27">
+          <description>Dodawanie atrybutu defer do skryptu</description>
+          <long-description>Sprawdza czy na końcu adresu skryptu znajduje się `#defer` i jeżeli tak dodaje `defer="defer"` po atrybucie `src` taga script.</long-description>
+          <tag name="param" line="27" description="&lt;p&gt;Adres URL skryptu&lt;/p&gt;" type="string" variable="$url">
+            <type>string</type>
+          </tag>
+          <tag name="return" line="27" description="" type="string">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$url</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="41" package="Default">
+        <name>admin_styles</name>
+        <full_name>\wcm_admin_actions::admin_styles()</full_name>
+        <docblock line="41">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="49" package="Default">
+        <name>admin_scripts</name>
+        <full_name>\wcm_admin_actions::admin_scripts()</full_name>
+        <docblock line="49">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="70" package="Default">
+        <name>admin_templates</name>
+        <full_name>\wcm_admin_actions::admin_templates()</full_name>
+        <docblock line="70">
+          <description>Generowanie szablonów aplikacji</description>
+          <long-description>Funkcja dołącza wszystkie pliki w katalogu WCM_PLUGIN_TEMPLATES_DIR/common oraz katalogu zdefiniowanym w stałej WCM_PLUGIN_ADMIN_TEMPLATES_DIR
+Zdefiniowa wewnątrz funkcji tablica $dirs przechowuje ścieżki do katalogów z szablonami do dołączenia.</long-description>
+          <tag name="param" line="70" description="&lt;p&gt;tablica ścieżek z dodadkowymi plikami szablonów&lt;/p&gt;" type="array" variable="$additional_directories">
+            <type>array</type>
+          </tag>
+          <tag name="return" line="70" description="" type="void">
+            <type>void</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$additional_directories</name>
+          <default>null</default>
+          <type>array</type>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="13" code="PPC:ERR-50008">No summary for method __constructor()</error>
+      <error line="41" code="PPC:ERR-50008">No summary for method admin_styles()</error>
+      <error line="49" code="PPC:ERR-50008">No summary for method admin_scripts()</error>
+    </parse_markers>
+    <source>eJylVttu20YQfddXDFQBusAmnSBogciyY9RpYNQugiRGgaYBtSZX0oqXZXaXpknDL0HzEUU/o695q/Vfnd0lKUq2ehVsUdw5M3PmwhkeHqeLFDruaNQZwUnoLymQIGYJk0oQxQXpaMH3EZEESpIzKvBKpSI5EEQzyIuQi7KQqshJUvgLSEVJS7g8g5QDGuEJ2zbpaJtup+OjVQm5H3tG7hFfMZ7I2w5A85dmVxHzYZYlRgie5yNEicxHS4OhxhocgKAqEwn01ILJMZ7cdTr4rQMDGMEpDwgS1FyUKK4ylUFAZ1RAgCxDUaR4oIEG/DYVJA9KAn5ZQEIg5Ktf/AyjEFRmDbxMyDLIMGGS3f8K06+MvSkwWNLVFxoxUCRE8wFByNQIJ11z6U51biwPHxlNpfCniJ4TkL5gqXIaJi9SIkis88iSOfQyEcGJZgGXb85rIhZYhV8h9Zm7Th/WS7WzyEJB8eTaI7JIfM96lYMNP0NUt+llMzCilCNEy/agb6PtD2EymcCMRJIahXYhEDg2R1RLjREmbakHw200mvcETSPi00FjHf3gv2XTMvVPVZxu3xZ50rd5H4Pti1Z/Pd5lth+xpyMqN5osTz2afMxoRq0UHc94ovZJTiWPqdz3pdQcFkql8rnrxuTGDxLninOluz/VNz6P3baS+8z5xjlwUXPj2EEKjjVn8ltdMBE72r2iuDucqsrteB4EZTAYlaJqQcX+Urv/8dsL7/X55auzHzzddg703YQH1It5kGGCXIt1A3zA3WV9a+gvt9nvQZJFTTUfc3ydUeu1yWGWpOHcZA1lL546z5yn1hfe/lcPgmeqDu9xRxWk8VTdW4dECFKsycLwXzm/+Su/N//LfNNoWy529WFzgE144BzskyhdEOdrXcZGtK5kzavdHP0lUhDFLpI72rQey69oQgW3g1mW5CriyR+/42pJIxYSXC/NIPwuS3DdEJynq0/3n32czbnUWydERQ3GRQQhUSTi86zdsO9eXrw+P3n38q13evbGxZBjfB5wB5VrdInDAbeTZlHEaAaH5eoTXbatnJxebNsyrH5qVCGneXL/WYlSP3ZmMyqin0ICvYAJadaiv+C5Xhir33Dsr74gadw+FQ8ddlnngMRGVAdLE0Ye7ARTDOiRIGD6ISeRh36oXosM90PtvHJFQzSud1EQ8rxA6ybBeF0nfW2/qtk1Z8Hf7BE7WBSNcQorqrfDDjqTqiluW2PH5mViA/FiKuY4Tm2LVbthVx3NCLK17O89xD5eLdAdqheQbeJdTIdwvFP2vKI3hHoKzzguUn8xqIIh0vyAasTq1WmWHp4NKslahhlQqXGASeApTVqosclSA8wXLKIw6M0QiQ4DjayVNyyiTRbUOR1Uz6D9pILOvZgoZNt3B85o+P5n58Ptkztn1HP1ypztad0NFWvrikiKHUmbCDD7+338RvF7eAIfxi2mTcgzprdjr+4NtGO0deX6DgayRRvg+OjQjjFQRUon3VrTXZJrYiVdYMGke2heWfXDpBmMUbF7ZM8E/ZhhuTye+Bu+hxp06FojFttyfWcvna375tN5CLurft017xD6bbNzfPQnmCqMhg==</source>
+  </file>
+  <file path="class-wcm-filters.php" generated-path="class-wcm-filters.html" hash="844da2bdca89eb17ce8d71a5106947f8" package="Default">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="Default"/>
+    </docblock>
+    <class final="false" abstract="false" namespace="" line="5" package="Default">
+      <extends/>
+      <name>wcm_filters</name>
+      <full_name>\wcm_filters</full_name>
+      <docblock line="5">
+        <description></description>
+        <long-description></long-description>
+        <tag name="package" line="5" description="Default"/>
+      </docblock>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="8" package="Default">
+        <name>woocommerce_cart_item_thumbnail</name>
+        <full_name>\wcm_filters::woocommerce_cart_item_thumbnail()</full_name>
+        <docblock line="8">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$image</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$cart_item</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$cart_item_key</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="55" package="Default">
+        <name>add_defer_attribute</name>
+        <full_name>\wcm_filters::add_defer_attribute()</full_name>
+        <docblock line="55">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$tag</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$handle</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="73" package="Default">
+        <name>register__</name>
+        <full_name>\wcm_filters::register__()</full_name>
+        <docblock line="73">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="80" package="Default">
+        <name>remove_verion_suffix</name>
+        <full_name>\wcm_filters::remove_verion_suffix()</full_name>
+        <docblock line="80">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$src</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="" line="88" package="Default">
+        <name>_constructor</name>
+        <full_name>\wcm_filters::_constructor()</full_name>
+        <docblock line="88">
+          <description></description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+      <error line="5" code="PPC:ERR-50005">No summary for class \wcm_filters</error>
+      <error line="8" code="PPC:ERR-50015">Argument $image is missing from the Docblock of woocommerce_cart_item_thumbnail</error>
+      <error line="8" code="PPC:ERR-50015">Argument $cart_item is missing from the Docblock of woocommerce_cart_item_thumbnail</error>
+      <error line="8" code="PPC:ERR-50015">Argument $cart_item_key is missing from the Docblock of woocommerce_cart_item_thumbnail</error>
+      <error line="8" code="PPC:ERR-50008">No summary for method woocommerce_cart_item_thumbnail()</error>
+      <error line="55" code="PPC:ERR-50015">Argument $tag is missing from the Docblock of add_defer_attribute</error>
+      <error line="55" code="PPC:ERR-50015">Argument $handle is missing from the Docblock of add_defer_attribute</error>
+      <error line="55" code="PPC:ERR-50008">No summary for method add_defer_attribute()</error>
+      <error line="73" code="PPC:ERR-50008">No summary for method register__()</error>
+      <error line="80" code="PPC:ERR-50015">Argument $src is missing from the Docblock of remove_verion_suffix</error>
+      <error line="80" code="PPC:ERR-50008">No summary for method remove_verion_suffix()</error>
+      <error line="88" code="PPC:ERR-50008">No summary for method _constructor()</error>
+    </parse_markers>
+    <source>eJy1V81u3DYQvvsppoIBag1Lam+F9yenADkUaJAYvRgGwZW4Er2SqJKU5U3gS16pj1DkvToktZL2x9vm0CCQuMP5+eab4YhevGuKBq7wX1oyraFLK7oRpeFKw9crAP+/adelSEEbZvC1aevUCFlDJ2Uqq4qrlNOUKUOF4RU1RVutaybKEK5FxXJ+C9fD7nRNt3w3c1EArhtmClgCSQpZ8WRbCl6bOCukNqLO46ZM1lrqWnZ6K5KOdWzLSl5nTH3hcbYRqmJWx+OkhanKpGuiVNYG3SRk7mOkrcgwRs4NTVulcIu2misqsnDWqzxpWVsCOOp5TDEQp9Q2pWSZTghKvCfc6X9NM/LiY2lMYuu6RyI2IQjt4oSTmDOYeTZ6IIjBiqkD7HPRU33oUdvUejrQxG1nPJUZD53uLRjV8kHXBv8Jo9dtaUu0t5wE9zrDzgPhL9gQNSsbJZ94asgjLLFU1iuZWkGSAE8LCWTRKL4ic//rmSmatVUTwpppXrMKcQ2+gyPflvPgEcHM964S72uM0reVrZBfIOMLzX1PujZeWq9R7zHKmGHBaqGNknW++milWwO+xdgi6eUkDmChG1avavalY9CUYtveBej8B1BbJIlzgi+P6BD6sHwFXmoOX6dpoXtacJZht61zm95YAZeo/k1oJP+BeCXyOH/TmmbC9gI+B+Tj5uyCXd/7Bzn/N0t37tH0DJKYJKb49ecoikh8Jt786thrKXN5iQC7j+mfsDoxP8eAlZ+m4LTP5n1B/zDbfcCTRAff0xyTm3Gtdlp2rBYcKlELZloF3W6tWL1LC8gkDHOOjTY3yb9UgbaqtMO0MKbRdwmOo2v6+f2nP95/egg+3N9/pB9+/3wfPALCnY7JGPgLTjmcG4fy27NBZg+/XGpAD8SOYotkkYnn/dm0gzGygzFCi6jAo9msfM4czPdvEvLv3/7+q9uKOzz7q6mlqHKnj+/R2UnQALRKlyedNjATEzyd6LV/kvPt938yOfo/S+Ik/I/xtwNranaNZ+6IptGtZyiY9uiEneAsMcdTN76AiWWZrLWF9kYVbFonwZ2QjLHHWTmsLiyGpdf2z/GhOB6tusc+t7LXi3cbTAE/ohsEzYxRYt0anAmG5VjBgtWZ/Vj72Y3fPNQFnSrRGPB7GowEU3BgSrEdrHkpO3+/8GqaGum9I51OJ9yjJ4ajoYqeNLn1Imy655ZPBEDWUhr8bLHmQPr0Z8vVLmqFlTphP7vcYyMVZ2kRnkJgGq59qn5rNnyVxAbCgy387i+PCZiwi5io4k3JUmx822PY8AScg2XgXkEvtVQOk3VasX2dcH/uinSxSorn+EVAeDTs4YyFdVP2xnqs5DOHroFnvNVaq4YpVsFGyQrsmeE1EtfyfQ31VT9h34xp/VF0hr+objcb8YK3JcwLDpmzdDRS+z0kAi2WeF+C2fS8W7Pl3qcrIGUqD5225cm53RO1JweF8zHRA4YGmPbGiADa1EgV9pe0Q4YLoadeXu1fAe9W/wBYx7Ii</source>
+  </file>
+  <package name="Default" full_name="Default"/>
+  <package name="global" full_name="global"/>
+  <namespace name="global" full_name="global"/>
+  <deprecated count="0"/>
+</project>

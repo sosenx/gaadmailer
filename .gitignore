@@ -3,3 +3,4 @@ _notes
 .sass-cache
 dist/gzip
 vendor
+tmp
