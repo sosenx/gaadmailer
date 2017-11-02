@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "28d1ff19d39184ae0ba83c609fde5a8b",
+    "content-hash": "84fd77a13857541df377997683b8487a",
     "packages": [
         {
             "name": "cilex/cilex",
@@ -580,16 +580,16 @@
         },
         {
             "name": "jms/serializer",
-            "version": "1.9.0",
+            "version": "1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "f4683f41ebf21e60667447bb49939bee35807c3c"
+                "reference": "e708d6ef549044974b60a57fdcec2fa165436d57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/f4683f41ebf21e60667447bb49939bee35807c3c",
-                "reference": "f4683f41ebf21e60667447bb49939bee35807c3c",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/e708d6ef549044974b60a57fdcec2fa165436d57",
+                "reference": "e708d6ef549044974b60a57fdcec2fa165436d57",
                 "shasum": ""
             },
             "require": {
@@ -659,7 +659,7 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2017-09-28T15:17:28+00:00"
+            "time": "2017-10-27T07:15:54+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -952,6 +952,49 @@
             "description": "Converts CSS styles into inline style attributes in your HTML code",
             "homepage": "http://www.pelagodesign.com/sidecar/emogrifier/",
             "time": "2017-03-02T12:51:48+00:00"
+        },
+        {
+            "name": "php-imap/php-imap",
+            "version": "2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barbushin/php-imap.git",
+                "reference": "cc1a49a3f68090db182183c59ffbc09055d59f5b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barbushin/php-imap/zipball/cc1a49a3f68090db182183c59ffbc09055d59f5b",
+                "reference": "cc1a49a3f68090db182183c59ffbc09055d59f5b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PhpImap": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sergey Barbushin",
+                    "email": "barbushin@gmail.com",
+                    "homepage": "http://linkedin.com/in/barbushin"
+                }
+            ],
+            "description": "PHP class to access mailbox by POP3/IMAP/NNTP using IMAP extension",
+            "homepage": "https://github.com/barbushin/php-imap",
+            "keywords": [
+                "imap",
+                "mail",
+                "php"
+            ],
+            "time": "2015-09-16T07:40:39+00:00"
         },
         {
             "name": "phpcollection/phpcollection",

@@ -1,5 +1,5 @@
 var Gmailer_Outbox = { 
-  template: '#templates-outbox',
+  template: '#mailer-outbox',
    
   props: [],
    

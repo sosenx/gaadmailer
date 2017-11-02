@@ -1,14 +1,14 @@
-var Gmailer_Archives = { 
-  template: '#templates-archives',
+var Gmailer_Dashboard = {
+  template: '#mailer-dasboard',
    
   props: [],
-   
+  
   data: function(){
-    return {} 
+    return {}
   },
   
   created: function(){},
-      
+    
   mounted: function(){},
    
   methods : {}

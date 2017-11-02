@@ -100,31 +100,40 @@ class wcm_actions {
     }    
   }
   
-  
-  
-  /*
-  * Generates javascript/template for common components
-  */
-  public static function app_templates(){
-    
-   $tpl_dir = opendir( WCM_PLUGIN_APP_TEMPLATES_DIR );    
-    
+  public static function put_templates( $dir ){
+    $tpl_dir = opendir( $dir = str_replace( '\\', '/', $dir ) );
     while ($f = readdir($tpl_dir) ){
       $id = array();
       preg_match('/(.*)[\.]{1}.*$/', $f, $id);
-      $id = basename(WCM_PLUGIN_APP_TEMPLATES_DIR ) . '-' . $id[ 1 ]; 
+      $id = basename( $dir ) . '-' . $id[ 1 ];
      
-      $template = WCM_PLUGIN_APP_TEMPLATES_DIR . '/'.$f;      
+      $template = $dir . '/'.$f;      
       if( is_file( $template ) ){
+
         ?><script type="template/javascript" id="<?php echo $id; ?>"><?php require_once( $template ); ?></script><?php
       }
       
     }
-     
+  }
+  
+  /**
+  * Generates javascript/template for common components
+  */
+  public static function app_templates(){
+   global $post;
+   $post_slug = $post->post_name; 
+   
+   //common components templates
+   wcm_actions::put_templates( WCM_PLUGIN_APP_TEMPLATES_DIR );
+   //app templates
+   wcm_actions::put_templates( WCM_PLUGIN_APP_TEMPLATES_DIR . '/' . $post_slug );
   }
   
   
   public static function common_styles(){
+    global $post;
+    $post_slug = $post->post_name;
+
     if(  GMAILER_ENV === 'DEV' ){
       wp_enqueue_style( 'gmailer-app-css', WCM_PLUGIN_URL . '/css/gmailer-app.css', false, false);
       wp_enqueue_style( 'gmailer-upload-csv-css', WCM_PLUGIN_URL . '/css/upload-csv.css', false, false);
@@ -132,27 +141,59 @@ class wcm_actions {
     }
     
     if(  GMAILER_ENV === 'DIST' ){
-      wp_enqueue_style( 'gmailer-upload-csv-css', WCM_PLUGIN_URL . '/dist/css/app.min.css', false, false);
+      wp_enqueue_style( 'gmailer-upload-csv-css', WCM_PLUGIN_URL . '/dist/css/'.$post_slug.'/app.min.css', false, false);
     }
      
     
   }
   
+
+
   public static function app_scripts(){
+    global $post;
+    $post_slug = $post->post_name;
+
+
 
     if(  GMAILER_ENV === 'DEV' ){
-      wp_enqueue_script( 'gmailer-dasboard-js', WCM_PLUGIN_URL . '/js/dasboard.js', array( 'vue-js' ), false, true );
-      wp_enqueue_script( 'gmailer-upload-csv-js', WCM_PLUGIN_URL . '/js/upload-csv.js', array( 'vue-js' ), false, true );
 
-      wp_enqueue_script( 'gmailer-app-js', WCM_PLUGIN_URL . '/js/gmailer-app.js', 
-        array( 
-          'vue-js',
-          'gmailer-dasboard-js'
-        ),
-        false, true );
+    if ($post_slug == 'imap-watch') {
+      wp_enqueue_script( 'imap-watch-dashboard-js', WCM_PLUGIN_URL . '/js/'.$post_slug.'/dashboard.js', array( 'vue-js' ), false, true );
+      wp_enqueue_script( 'imap-watch-templates-js', WCM_PLUGIN_URL . '/js/'.$post_slug.'/templates.js', array( 'vue-js' ), false, true );
+      
+      wp_enqueue_script( 'imap-watch-app-js', WCM_PLUGIN_URL . '/js/'.$post_slug.'/imap-watch-app.js', 
+          array( 
+            'vue-js',
+            'imap-watch-dashboard-js'
+          ),
+          false, true );
+
+         
+
+    }
+
+      // main feture app  (legacy ideology of plugin features base) 
+      if ($post_slug == 'mailer') {
+
+        wp_enqueue_script( 'gmailer-dashboard-js', WCM_PLUGIN_URL . '/js/'.$post_slug.'/dashboard.js', array( 'vue-js' ), false, true );
+        wp_enqueue_script( 'gmailer-filters-js', WCM_PLUGIN_URL . '/js/'.$post_slug.'/filters.js', array( 'vue-js' ), false, true );
+        wp_enqueue_script( 'gmailer-templates-js', WCM_PLUGIN_URL . '/js/'.$post_slug.'/templates.js', array( 'vue-js' ), false, true );
+        wp_enqueue_script( 'gmailer-archives-js', WCM_PLUGIN_URL . '/js/'.$post_slug.'/archives.js', array( 'vue-js' ), false, true );
+        wp_enqueue_script( 'gmailer-send-js', WCM_PLUGIN_URL . '/js/'.$post_slug.'/send.js', array( 'vue-js' ), false, true );
+        wp_enqueue_script( 'gmailer-outbox-js', WCM_PLUGIN_URL . '/js/'.$post_slug.'/outbox.js', array( 'vue-js' ), false, true );
+        wp_enqueue_script( 'gmailer-upload-csv-js', WCM_PLUGIN_URL . '/js/'.$post_slug.'/upload-csv.js', array( 'vue-js' ), false, true );
+
+        wp_enqueue_script( 'gmailer-app-js', WCM_PLUGIN_URL . '/js/'.$post_slug.'/gmailer-app.js', 
+          array( 
+            'vue-js',
+            'gmailer-dashboard-js'
+          ),
+          false, true );
+
+        } 
+      }
 
       
-     } 
 
     
     if(  GMAILER_ENV === 'DIST' ){

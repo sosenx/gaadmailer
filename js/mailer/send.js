@@ -1,5 +1,5 @@
-var Gmailer_Filters = { 
-  template: '#templates-filters',
+var Gmailer_Send = { 
+  template: '#mailer-send',
    
   props: [],
    

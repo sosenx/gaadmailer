@@ -1,7 +1,7 @@
-var Gmailer_Send = { 
-  template: '#templates-send',
+var Gmailer_Templates = { 
+  template: '#mailer-templates',
    
-  props: [],
+  props: [], 
    
   data: function(){
     return {} 

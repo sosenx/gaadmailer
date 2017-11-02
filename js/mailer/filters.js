@@ -1,14 +1,14 @@
-var Gmailer_Dashboard = {
-  template: '#templates-dasboard',
+var Gmailer_Filters = { 
+  template: '#mailer-filters',
    
   props: [],
-  
+   
   data: function(){
-    return {}
+    return {} 
   },
   
   created: function(){},
-    
+      
   mounted: function(){},
    
   methods : {}

@@ -1,5 +1,5 @@
-var Gmailer_Templates = { 
-  template: '#templates-templates',
+var Imap_Watch_Templates = { 
+  template: '#imap-watch-templates',
    
   props: [], 
    
