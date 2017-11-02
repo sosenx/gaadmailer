@@ -4,3 +4,4 @@ _notes
 dist/gzip
 vendor
 tmp
+docs
