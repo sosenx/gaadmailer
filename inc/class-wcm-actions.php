@@ -105,7 +105,7 @@ class wcm_actions {
     while ($f = readdir($tpl_dir) ){
       $id = array();
       preg_match('/(.*)[\.]{1}.*$/', $f, $id);
-      $id = basename( $dir ) . '-' . $id[ 1 ];
+      $id = basename( $dir ) . '-' . empty( $id ) ? $f : $id[ 1 ];
      
       $template = $dir . '/'.$f;      
       if( is_file( $template ) ){

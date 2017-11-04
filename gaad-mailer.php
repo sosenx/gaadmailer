@@ -40,6 +40,8 @@ require_once( 'inc/class-wcm-actions.php' );
 require_once( 'class/class-rest-api.php' );  
 require_once( 'inc/class-wcm-admin-actions.php' );
 require_once( 'vendor/autoload.php' );
+require_once( 'class/abstract-imap-watch.php' );
+
 
 
 

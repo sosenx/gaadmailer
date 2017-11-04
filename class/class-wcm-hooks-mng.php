@@ -1,14 +1,11 @@
 <?php 
-
-
-
 class wcm_hooks_mng{
   
   var $label;
   public $hooks; 
   
-  
-  public function wcm_hooks_mng($label, $hooks = NULL ){
+   
+  public function __construct($label, $hooks = NULL ){
     $this->label = !is_string( $label ) ? 'default' : $label;
     $this->hooks = is_null( $hooks ) || !is_array( $hooks ) ? array() : $hooks;
     

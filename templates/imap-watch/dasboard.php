@@ -3,6 +3,9 @@
   <?php _e( 'gaad dasboard imap watch', 'gaad-mailer' ) ?>
   <?php
 
+  $imapw = new imapwatch\imapReader();
+$R=1;
+/*
 $mailbox = new PhpImap\Mailbox('{imap.dpoczta.pl:993/imap/ssl}INBOX', 'zamowienia@fotokalendarze2018.pl', '7lho848EcaP4', __DIR__);
 
 // Read all messaged into an array:
@@ -30,7 +33,6 @@ for( $i=0; $i<$max; $i++){
 	
 }
 
-/*
 $imap = imap_open("{imap.dpoczta.pl:993/imap/ssl}INBOX",  'zamowienia@fotokalendarze2018.pl', '7lho848EcaP4' );
 */
   ?>
