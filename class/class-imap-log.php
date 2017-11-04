@@ -18,7 +18,7 @@ class log{
 	/**
 	* zapisuje rekord do logu w bazie danych
 	*/
-	public static function write( array $input ) : bool{		
+	public static function write( array $input ){		
 		global $wpdb;
 
 		$r = $wpdb->insert( IMAP_DB_TABLE_PREFIX . 'log', array(

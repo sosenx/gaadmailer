@@ -14,25 +14,6 @@ class prestart{
 	}
 	
 
-/**
-CREATE TABLE `mailbox` (
-  `id` int(11) NOT NULL,
-  `label` varchar(50) NOT NULL,
-  `host` varchar(200) NOT NULL,
-  `login` varchar(200) NOT NULL,
-  `pass` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-ALTER TABLE `mailbox`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `mailbox`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
-*/
-
-
-
 	/**
 	* Wykonuje testy przed startem systemu
 	*/

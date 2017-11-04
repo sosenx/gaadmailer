@@ -2,16 +2,18 @@
 namespace imapwatch;
 
 require_once( 'config-imap.php' );
+
 require_once( 'class-imap-log.php' );
-if( IMAP_WATCH_ENV === 'PRESTART' || IMAP_WATCH_ENV === 'DEV'){
-	require_once( 'class-imap-dev-log.php' );
-}
+if( IMAP_WATCH_ENV === 'PRESTART' || IMAP_WATCH_ENV === 'DEV'){ require_once( 'class-imap-dev-log.php' ); }
+
+require_once( 'class-imap-triggers.php' );
+require_once( 'class-imap-actions.php' );
 
 require_once( 'class-create-table.php' );
 
 require_once( 'class-imap-prestart.php' );
 require_once( 'class-imap-reader.php' );
-require_once( 'class-imap-triggers.php' );
+
 
 
 /**
@@ -22,6 +24,8 @@ abstract class imapWatch{
 	*Przchowuje wczytane z bazy skrzynki pocztowe
 	*/
 	private $mail_boxes;
+	private $triggers;
+	private $actions;
 
 
 
@@ -39,14 +43,37 @@ abstract class imapWatch{
 		*/
 		$this->getMailBoxes();
 
+
 		/**
 		* Pobieram triggery
 		*/
 		$this->getTriggers();
 
+		/**
+		* Pobieram akcje
+		*/
+		$this->getActions();
+
+		
+
 		return $this;		
 	}
 	
+	/**
+	* Pobiera triggery
+	*/
+	function getActions(){
+		$this->actions	= new imapActions();
+	}
+
+
+	/**
+	* Pobiera triggery
+	*/
+	function getTriggers(){
+		$this->triggers	= new imapTriggers();
+	}
+
 	/**
 	* Tworzy listę obsugiwanych przez Imap Watcher skrzynek
 	*/

@@ -1,6 +1,8 @@
 <?php
 namespace imapwatch; 
 
+
+
 if ( !defined( 'IMAP_ROOT_DIR')){
 	/**
 	* Katalog glowny
@@ -33,6 +35,9 @@ if ( !defined( 'IMAP_DB_TABLE_AUTOCREATE_ON_TEST')){
 	*/
 	define( 'IMAP_DB_TABLE_AUTOCREATE_ON_TEST', true );
 }
+
+
+
 
 
 

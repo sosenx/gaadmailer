@@ -4,6 +4,7 @@
   <?php
 
   $imapw = new imapwatch\imapReader();
+  
 $R=1;
 /*
 $mailbox = new PhpImap\Mailbox('{imap.dpoczta.pl:993/imap/ssl}INBOX', 'zamowienia@fotokalendarze2018.pl', '7lho848EcaP4', __DIR__);
