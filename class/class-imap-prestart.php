@@ -68,6 +68,7 @@ COMMIT;
 			IMAP_DB_TABLE_PREFIX . 'todo',
 		);
 		$test_ok = true;
+
 		$max = count ( $tables );
 		for ($i=0; $i < $max; $i++) { 
 			if ( !prestart::db_table_exists( $tables[ $i ] ) ) {
@@ -81,11 +82,10 @@ COMMIT;
 				} else break;
 			}
 		}
-/*
 
-				global $wpdb;
-			$results = $wpdb->get_results( "SELECT * FROM information_schema.tables WHERE table_name = 'niema'", OBJECT );**/
-	
+		log::write( array(
+			'test' => 'test', )
+			);
 		return $test_ok;
 		
 	}

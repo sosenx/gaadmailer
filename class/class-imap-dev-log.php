@@ -3,11 +3,10 @@ namespace imapwatch;
 /**
 *
 */
-require_once( 'class-mailbox.php' );
 
-class imapReader extends imapWatch {
+
+class devLog extends log{
 	
-
 	/**
 	*
 	*/
