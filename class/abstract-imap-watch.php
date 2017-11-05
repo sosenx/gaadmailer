@@ -13,6 +13,7 @@ require_once( 'class-create-table.php' );
 
 require_once( 'class-imap-prestart.php' );
 require_once( 'class-imap-reader.php' );
+require_once( 'class-imap-todo.php' );
 
 
 
@@ -23,9 +24,11 @@ abstract class imapWatch{
 	/*
 	*Przchowuje wczytane z bazy skrzynki pocztowe
 	*/
+	private $mail_boxes_data;
 	private $mail_boxes;
 	private $triggers;
 	private $actions;
+	private $todos;
 
 
 
@@ -41,24 +44,43 @@ abstract class imapWatch{
 		/**
 		* Pobieram skrzynki
 		*/
-		$this->getMailBoxes();
+		$this->getMailBoxesData();
 
 
 		/**
 		* Pobieram triggery
 		*/
-		$this->getTriggers();
+		$this->getTriggersFromDB();
 
 		/**
 		* Pobieram akcje
 		*/
 		$this->getActions();
 
+		/**
+		* Pobieram akcje
+		*/
+		$this->connect();
+
+		/*
+		* Tworzenie listy zadan do wykonania przez workera 
+		*/
+		$this->todos = new imapToDo();
 		
 
 		return $this;		
 	}
 	
+	/**
+	* Łączy się ze zdefiniowanymi skrzynkami
+	*/
+	function connect(){
+		foreach ($this->mail_boxes_data as $key => $value) {
+			$this->mail_boxes[ $key ] = new imapMailbox( $value, $this );
+		}
+	}
+
+
 	/**
 	* Pobiera triggery
 	*/
@@ -68,16 +90,35 @@ abstract class imapWatch{
 
 
 	/**
+	* Pobiera triggery z bazy danych
+	*/
+	function getTriggersFromDB(){
+		$this->triggers	= new imapTriggers();		
+	}
+
+	/**
 	* Pobiera triggery
 	*/
-	function getTriggers(){
-		$this->triggers	= new imapTriggers();
+	function getTriggers( $id = NULL){
+
+		if ( !is_null( $id ) ) {
+			$tr = $this->triggers->getTriggers();
+			$r = array();	
+			foreach ( $tr as $key => $value) {
+				if ( $value->mailbox_id === $id ) {
+					array_push( $r, $value );
+				}				
+			}			
+			return $r;
+		} else {
+			return $this->triggers;	
+		}		
 	}
 
 	/**
 	* Tworzy listę obsugiwanych przez Imap Watcher skrzynek
 	*/
-	function getMailBoxes(){		
+	function getMailBoxesData(){		
 		global $wpdb;		
 		$mailboxes_table_name = IMAP_DB_TABLE_PREFIX . 'mailbox';
 		$r = $wpdb->get_results( "SELECT * FROM `" . $mailboxes_table_name . "`", ARRAY_A );
@@ -89,7 +130,7 @@ abstract class imapWatch{
 			}
 		}
 
-		return $this->mail_boxes;
+		return $this->mail_boxes_data;
 	}
 
 
@@ -97,7 +138,7 @@ abstract class imapWatch{
 	* Dodaje skrzynkę pocztową do klasy
 	*/
 	function addMailbox( array $mailbox ){		
-		$this->mail_boxes[ sanitize_title($mailbox['label'] ) ]= $mailbox;		
+		$this->mail_boxes_data[ sanitize_title($mailbox['label'] ) ] = $mailbox;		
 	}
 	
 	/**

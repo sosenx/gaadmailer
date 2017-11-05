@@ -7,6 +7,8 @@ namespace imapwatch;
 
 class imapTrigger {
 	public $slug;
+	public $mailbox_id;
+	public $action_id;
 
 	/**
 	*
@@ -14,9 +16,76 @@ class imapTrigger {
 	function __construct( array $input ){
 
 		$this->setSlug( $input[ 'label' ] );
+		$this->setMailboxId( $input[ 'mailbox_id' ] );
+		$this->setActionId( $input[ 'action' ] );
 		$this->setRules( json_decode( $input[ 'json' ], true ) );
 		return $input;
 	}
+
+
+	/**
+	* Sprawdza, czy podana wiadomość pasuje do triggera
+	*
+	* @param object $mailHeader Obiekt z nagówkiem emaila
+	*/
+	function check( $mailHeader ){
+		$comp = array();
+		foreach ($this->getRules() as $key => $rule ) {
+			foreach ($mailHeader as $field => $value) {
+				if ( $rule['data']['field'] === $field) {
+					array_push( $comp, $this->compare( $rule['compare'], $rule['data']['value'], $value ) );
+				}				
+			}			
+		}
+		return preg_match( '/0/', implode('', $comp )) == 0;
+	}
+
+ 
+	/**
+	* Ustawia mailboxId triggera
+	*
+	* @param string $compare Sposob porownania
+	*/
+	function compare( string $compare, string $str1, string $str2 ){
+		$regExp = $compare[0] === '/';
+		if ( $regExp ) {
+			# code...
+		} else {
+			switch ( $compare) {
+				case '==':
+					return $str1 == $str2;
+					break;
+				case '*==':
+					$matches = array();
+					preg_match_all('/'.$str1.'/', $str2, $matches);
+					if ( empty( $matches[0] ) ) {
+						return false;
+					}
+					return !is_null( $matches[0][0] ) && $matches[0][0] == $str1 ? true : false;										
+					break;	
+			}
+		}
+		
+	}
+
+	/**
+	* Ustawia mailboxId triggera
+	*
+	* @param string $slug Mailbox Id triggera
+	*/
+	function setMailboxId( string $mailbox_id ){
+		$this->mailbox_id = $mailbox_id;
+	}
+	
+	/**
+	* Ustawia mailboxId triggera
+	*
+	* @param string $action_id action_id triggera
+	*/
+	function setActionId( string $action_id ){
+		$this->action_id = $action_id;
+	}
+
 
 
 	/**

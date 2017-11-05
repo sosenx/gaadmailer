@@ -38,8 +38,9 @@ class createTable {
 
 		$sql = "CREATE TABLE $table_name (
 		  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+		  `mailbox_id` mediumint(9) NOT NULL,
 		  `label` varchar(50) NOT NULL,
-		  `action` varchar(200) NOT NULL,
+		  `action_id` varchar(200) NOT NULL,
 		  `json` text NOT NULL,
 		  
 		  PRIMARY KEY  (id)
@@ -118,8 +119,11 @@ class createTable {
 		$sql = "CREATE TABLE $table_name (
 		  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
 		  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-		  `log` varchar(50) NOT NULL,		  
-
+		  `mailbox_id` varchar(50) NOT NULL,		  
+		  `action` text NOT NULL,
+		  `header` text NOT NULL,
+		  `body` text NOT NULL,
+		  `status` varchar(50) NOT NULL DEFAULT 'added',
 		  PRIMARY KEY  (id)
 		) $charset_collate;";
 		
