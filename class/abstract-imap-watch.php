@@ -31,8 +31,6 @@ abstract class imapWatch{
 	private $todos;
 
 
-
-
 	/**
 	*
 	*/
@@ -55,7 +53,7 @@ abstract class imapWatch{
 		/**
 		* Pobieram akcje
 		*/
-		$this->getActions();
+		$this->getActionsFromDB();
 
 		/**
 		* Pobieram akcje
@@ -84,8 +82,42 @@ abstract class imapWatch{
 	/**
 	* Pobiera triggery
 	*/
-	function getActions(){
+	function getTodos(){
+		if ( is_null( $this->todos ) ) {
+			/*
+			* Tworzenie listy zadan do wykonania przez workera 
+			*/
+			$this->todos = new imapToDo();
+		}
+		return $this->todos;
+	}
+
+	/**
+	* Pobiera triggery
+	*/
+	function getActionsFromDB(){
 		$this->actions	= new imapActions();
+	}
+
+
+	/**
+	* Pobiera akcje
+	*/
+	function getActions( ){
+		return $this->actions;
+	}
+
+	/**
+	* Pobiera akcje
+	*/
+	function getAction( int $action_id ){
+		$actions = $this->getActions();
+		foreach ($actions->getActions() as $key => $value) {
+			if ( (int)$value->getId() == (int)$action_id) {
+				return $value;
+			}
+		}
+		return false;
 	}
 
 

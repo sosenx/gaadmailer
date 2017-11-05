@@ -6,6 +6,7 @@ namespace imapwatch;
 
 
 class imapAction {
+	private $id;
 	public $slug;
 	private $config;
 	/**
@@ -14,8 +15,9 @@ class imapAction {
 	function __construct( array $input ){
 
 		$this->setSlug( $input[ 'label' ] );
+		$this->id = $input[ 'id' ];
 		$this->setConfig( json_decode( $input[ 'json' ], true ) );
-		return $input;
+		return $input; 
 	}
 
 
@@ -26,6 +28,25 @@ class imapAction {
 	*/
 	function setSlug( string $slug ){
 		$this->slug = sanitize_title( $slug );
+	}
+
+	/**
+	* Zwraca id akcji
+	*/
+	function toJSON(){
+		$data = array(
+			'id' => $this->getId(),
+			'slug' => $this->getSlug(),
+			'config' => $this->config
+		);
+		return json_encode( $data );
+	}
+
+	/**
+	* Zwraca id akcji
+	*/
+	function getId(){
+		return $this->id;
 	}
 
 	/**

@@ -7,7 +7,7 @@ require_once( 'class-imap-mailbox.php' );
 
 class imapReader extends imapWatch {
 	
-
+	private $todos;
 	/**
 	*
 	*/

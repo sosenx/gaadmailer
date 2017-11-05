@@ -119,10 +119,13 @@ class createTable {
 		$sql = "CREATE TABLE $table_name (
 		  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
 		  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-		  `mailbox_id` varchar(50) NOT NULL,		  
+		  `mailbox_id` mediumint(9) NOT NULL,		  
+		  `email_id` mediumint(9) NOT NULL,
+		  `action_id` mediumint(9) NOT NULL,
 		  `action` text NOT NULL,
 		  `header` text NOT NULL,
-		  `body` text NOT NULL,
+		  `textPlain` text NULL,
+		  `textHtml` text NOT NULL,
 		  `status` varchar(50) NOT NULL DEFAULT 'added',
 		  PRIMARY KEY  (id)
 		) $charset_collate;";

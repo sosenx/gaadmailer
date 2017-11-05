@@ -40,13 +40,27 @@ class imapMailbox{
 		$triggers = $this->getTriggers();
 		$emailsInfo = $this->mailbox->getMailsInfo( $mailsIds );
 		
-		foreach ($emailsInfo as $key => $header) {
+		foreach ($emailsInfo as $key => $header) {			
 			foreach ($triggers as $tkey => $trigger) {
 				/*
 				* Sprawdzanie, czy wiadomosc pasuje do triggera
-				*/
+				*/				
 				if ( $trigger->check( $header ) ) {
-					
+					$mail = $this->mailbox->getMail( $header->uid );
+					$this->parentObj->getTodos()->add( 
+						array(
+							'mailbox_id' => $trigger->mailbox_id, 
+							'email_id' => $header->uid,
+							'action_id' => $trigger->action_id,
+							'action' => $this->getAction( $trigger->action_id )->toJSON(), 
+							'header' => json_encode( $header ), 
+							'textPlain' => $mail->textPlain,
+							'textHtml' => $mail->textHtml
+						)
+					);
+				//	$this->mailbox->moveMail( $header->uid, str_replace( 'INBOX', 'Archives', $this->host ) );
+				//	$this->mailbox->deleteMail( $header->uid );
+					$r=1;
 
 				}
 				
@@ -55,6 +69,13 @@ class imapMailbox{
 
 	}
 	
+	/**
+	* Pobiera triggery
+	*/
+	function getAction( int $actionId ){		
+		return $this->parentObj->getAction( $actionId );		
+	}
+
 	/**
 	* Pobiera triggery
 	*/
