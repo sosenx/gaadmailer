@@ -40,7 +40,8 @@ class imapMailbox{
 		$triggers = $this->getTriggers();
 		$emailsInfo = $this->mailbox->getMailsInfo( $mailsIds );
 		
-		foreach ($emailsInfo as $key => $header) {			
+		foreach ($emailsInfo as $key => $header) {	
+			$f=1;		
 			foreach ($triggers as $tkey => $trigger) {
 				/*
 				* Sprawdzanie, czy wiadomosc pasuje do triggera
