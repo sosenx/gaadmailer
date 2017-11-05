@@ -12,7 +12,7 @@ class imapMailbox{
 	private $login;
 	private $pass;
 	private $mailbox;
-	private $parentObj;
+	public $parentObj;
 
 	/**
 	*

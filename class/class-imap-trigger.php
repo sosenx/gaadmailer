@@ -30,14 +30,27 @@ class imapTrigger {
 	*/
 	function check( $mailHeader ){
 		$comp = array();
-		foreach ($this->getRules() as $key => $rule ) {
+		$rules = $this->getRules();
+		foreach ( $rules as $key => $rule ) {
 			foreach ($mailHeader as $field => $value) {
 				if ( $rule['data']['field'] === $field) {
 					array_push( $comp, $this->compare( $rule['compare'], $rule['data']['value'], $value ) );
 				}				
 			}			
 		}
-		return preg_match( '/0/', implode('', $comp )) == 0;
+
+		/*
+		* Po przejrzeniu zasad triggera sprawdzanie czy wszystkie testy day wynik pozytywny
+		* Tutaj będzie można dodac warunek dla zasad: spenione wszystiue, speniona przynbajmniej jedna etc
+		*/
+		$testOK = true;
+		foreach ($comp as $key => $value) {
+			if ( !filter_var( $value, FILTER_VALIDATE_BOOLEAN) ) {
+				$testOK = false;
+			}
+		}
+
+		return $testOK;		
 	}
 
  
