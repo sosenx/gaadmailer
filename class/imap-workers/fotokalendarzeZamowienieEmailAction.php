@@ -6,32 +6,44 @@ namespace imapwatch\workers;
 */
 class fotokalendarzeZamowienieEmailAction extends \imapwatch\imapTaskWorker{
 
-
+public $r = 3;
 	/**
 	*
 	*/
 	function __construct( array $input ){
 		parent::__construct( $input );
+		$this->addRules();
+
 		
+		$this->addOperation( array($this, "step2"), array( $this, "six")  );
+		$this->addOperation( array($this, "step3"), array("seven", "eight")  );
 
-		return $this;
+			return $this;
+	}
+
+	/**
+	* Modyfiakacja zasad
+	*/
+	function addRules( ){					
+		$this->addRule( 'header_rules', 'from', array( 'regExp' => '/(.*)/') );	
 	}
 
 	/**
 	*
 	*/
-	function step1( $a, $b ){			
-		$d=1;
+	function step2( $a, $b ){			
+		$this->test = ' mamuta!';
 
 	}
-
 
 	/**
 	*
 	*/
-	function executeTask( ){			
-		call_user_func_array(array($this, "step1"), array("three", "four"));
-
+	function step3( $a, $b ){			
+		$d=$this->test;
+$r=1;
 	}
+
+
 
 }

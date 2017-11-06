@@ -18,7 +18,7 @@ class imapTask {
 	function __construct( array $todo_record_array ){
 		
 		$this->parseAction( $todo_record_array[ 'action' ] );
-
+		$this->task = $todo_record_array;
 		return $this;
 	}
 
@@ -28,7 +28,7 @@ class imapTask {
 	*/
 	function getPhpClass( ){
 		if ( $this->phpClassExists ) {
-			$this->executor = new $this->phpClass( $this->action['config'] );
+			$this->executor = new $this->phpClass( $this->task );
 			return $this->executor;
 		}
 
@@ -39,8 +39,8 @@ class imapTask {
 	*
 	*/
 	function parseAction( string $json ){
-		$this->action = json_decode( $json, true );
-		$this->phpClass = $this->action[ 'php-class' ];
+		$this->action = json_decode( $json );
+		$this->phpClass = $this->action->{'php-class'};
 		$this->phpClassExists = class_exists( $this->phpClass );
 		return $this->action;
 	}
