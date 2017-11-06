@@ -31,7 +31,7 @@ class prestart{
 	*/
 	public static function db_table_exists( string $name ) : bool {
 		global $wpdb;
-		$results = $wpdb->get_results( "SELECT * FROM information_schema.tables WHERE table_name = '" . $name . "'" );
+		$results = $wpdb->get_results( "SELECT * FROM information_schema.tables WHERE `table_schema` = '". \DB_NAME ."' AND `table_name` = '" . $name . "'" );		
 		return empty( $results ) ? false : true;
 	}
 
