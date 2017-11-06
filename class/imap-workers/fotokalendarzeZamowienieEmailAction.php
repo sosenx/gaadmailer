@@ -25,7 +25,7 @@ public $r = 3;
 	* Modyfiakacja zasad
 	*/
 	function addRules( ){					
-		$this->addRule( 'header_rules', 'from', array( 'regExp' => '/(.*)/') );	
+		//$this->addRule( 'header_rules', 'from', array( 'regExp' => '/(.*)/') );	
 	}
 
 	/**
