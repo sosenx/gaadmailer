@@ -23,7 +23,7 @@ abstract class imapTaskWorker {
 	*/
 	private $htmlBody;
 
-
+	private $parsedResponseTemplate;
 
 
 	private $operations = array();
@@ -231,7 +231,7 @@ abstract class imapTaskWorker {
 
 			ob_start("\imapwatch\imapTaskWorker::parseTemplateCallback");
 			include( $tpl_index );				
-			$parsedTemplate = ob_get_flush();
+			$this->parsedResponseTemplate = ob_get_flush();
 $r=1;
 
 		}
