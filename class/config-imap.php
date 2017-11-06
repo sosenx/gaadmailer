@@ -91,14 +91,15 @@ if ( !defined( 'IMAP_GET_READER_CODE' ) ){
 	/**
 	* Nadawanie flagi przeczytana dla przetworzonych wiadomości
 	*/
-	define( 'IMAP_GET_READER_CODE', '2432-fd32-4s5l-fds2' );
+	
+	define( 'IMAP_GET_READER_CODE', 'r' );
 }
 
 if ( !defined( 'IMAP_GET_WORKER_CODE' ) ){
 	/**
 	* Nadawanie flagi przeczytana dla przetworzonych wiadomości
 	*/
-	define( 'IMAP_GET_WORKER_CODE', '4s5l-fds2-2432-fd32' );
+	define( 'IMAP_GET_WORKER_CODE', 'w' );
 }
 
 
