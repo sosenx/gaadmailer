@@ -84,7 +84,7 @@ abstract class imapTaskWorker {
 
 		$mail->setFrom('from@example.com', 'Your Name');
 		$mail->addAddress( $this->respondTo );
-		$mail->Subject  = 'To dziala!!!!';
+		$mail->Subject  = 'Odpowiedz na maila z imapwatch';
 		$mail->Body     = $this->parsedResponseTemplate;
 		$mail->IsHTML(true);
 		$mail->CharSet = 'UTF-8';
