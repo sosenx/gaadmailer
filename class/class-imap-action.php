@@ -9,6 +9,7 @@ class imapAction {
 	private $id;
 	public $slug;
 	private $config;
+	private $phpClass;
 	/**
 	*
 	*/
@@ -36,11 +37,19 @@ class imapAction {
 	function toJSON(){
 		$data = array(
 			'id' => $this->getId(),
+			'php-class' => $this->getPhpClass(),
 			'slug' => $this->getSlug(),
 			'config' => $this->config
 		);
 		return json_encode( $data );
 	}
+
+	/**
+	* Zwraca nazwe klasy obslugujacej akcję
+	*/
+	function getPhpClass(){
+		return $this->phpClass;
+	}	
 
 	/**
 	* Zwraca id akcji
@@ -58,11 +67,13 @@ class imapAction {
 
 
 	/**
-	*
+	* Ustawie i waliduje zmienne konfiguracyjne klasy
 	*/
 	function setConfig( array $input ){
 
 		if ( is_array( $input ) ) {
+			$phpClass = !isset( $input['php-class'] ) ? IMAP_DEFAULT_ACTION_CLASS : $input['php-class'];
+			$this->phpClass = $phpClass;			
 			$this->config = $input[ 'config' ];			
 		}
 	}

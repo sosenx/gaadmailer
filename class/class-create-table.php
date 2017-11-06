@@ -20,7 +20,8 @@ class createTable {
 		  `label` varchar(50) NOT NULL,
 		  `host` varchar(200) NOT NULL,
 		  `login` varchar(200) NOT NULL,
-		  `pass` varchar(200) NOT NULL,
+		  `pass` varchar(200) NOT NULL,		  
+		  `active` TINYINT(1) NOT NULL DEFAULT '1',		  
 		  PRIMARY KEY  (id)
 		) $charset_collate;";
 		
@@ -42,6 +43,7 @@ class createTable {
 		  `label` varchar(50) NOT NULL,
 		  `action_id` varchar(200) NOT NULL,
 		  `json` text NOT NULL,
+		  `active` TINYINT(1) NOT NULL DEFAULT '1',
 		  
 		  PRIMARY KEY  (id)
 		) $charset_collate;";

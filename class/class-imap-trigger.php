@@ -45,8 +45,8 @@ class imapTrigger {
 		*/
 		$testOK = true;
 		foreach ($comp as $key => $value) {
-			if ( !filter_var( $value, FILTER_VALIDATE_BOOLEAN) ) {
-				$testOK = false;
+			if ( !filter_var( $value, FILTER_VALIDATE_BOOLEAN) ) {				
+				return false;
 			}
 		}
 

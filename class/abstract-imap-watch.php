@@ -13,6 +13,7 @@ require_once( 'class-create-table.php' );
 
 require_once( 'class-imap-prestart.php' );
 require_once( 'class-imap-reader.php' );
+require_once( 'class-imap-worker.php' );
 require_once( 'class-imap-todo.php' );
 
 
@@ -76,6 +77,7 @@ abstract class imapWatch{
 		foreach ($this->mail_boxes_data as $key => $value) {
 			$this->mail_boxes[ $key ] = new imapMailbox( $value, $this );
 		}
+		$r=1;
 	}
 
 
@@ -153,7 +155,7 @@ abstract class imapWatch{
 	function getMailBoxesData(){		
 		global $wpdb;		
 		$mailboxes_table_name = IMAP_DB_TABLE_PREFIX . 'mailbox';
-		$r = $wpdb->get_results( "SELECT * FROM `" . $mailboxes_table_name . "`", ARRAY_A );
+		$r = $wpdb->get_results( "SELECT * FROM `" . $mailboxes_table_name . "` WHERE `active` > 0", ARRAY_A );
  		$max = count( $r );
 
 		if ( is_array( $r ) && $max > 0) {

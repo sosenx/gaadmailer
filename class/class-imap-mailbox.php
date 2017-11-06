@@ -36,17 +36,25 @@ class imapMailbox{
 	*
 	*/
 	function checkMailbox(){
+		$this->mailbox = new \PhpImap\Mailbox( $this->host, $this->login, $this->pass, __DIR__);
 		$mailsIds = $this->mailbox->searchMailbox('ALL');
 		$triggers = $this->getTriggers();
 		$emailsInfo = $this->mailbox->getMailsInfo( $mailsIds );
 		
 		foreach ($emailsInfo as $key => $header) {	
-			$f=1;		
+			if ( IMAP_PROCESS_ONLY_UNSEEN && $header->seen === 1 ) {
+				continue;
+			}		
+
 			foreach ($triggers as $tkey => $trigger) {
 				/*
 				* Sprawdzanie, czy wiadomosc pasuje do triggera
-				*/				
-				if ( $trigger->check( $header ) ) {
+				*/	
+				
+				if ( (int)$this->id !== (int)$trigger->mailbox_id) {
+					continue;
+				}	
+				elseif ( $trigger->check( $header ) ) {
 					$mail = $this->mailbox->getMail( $header->uid );
 					$this->parentObj->getTodos()->add( 
 						array(
@@ -58,18 +66,57 @@ class imapMailbox{
 							'textPlain' => $mail->textPlain,
 							'textHtml' => $mail->textHtml
 						)
-					);
-				//	$this->mailbox->moveMail( $header->uid, str_replace( 'INBOX', 'Archives', $this->host ) );
-				//	$this->mailbox->deleteMail( $header->uid );
-					$r=1;
+					);				
 
-				}
-				
+					$this->markEmailAfterProcess( $header->uid, $header );
+
+				}				
 			}
+		}
+	}
+	
+
+	/**
+	* Flaguje wiadomość w zależności od ustawienia stalej IMAP_MARK_AFTER_PROCESS
+	*
+	* @param int $uid Id wiadomości email
+	*/
+	function markEmailAfterProcess( int $uid, $header = NULL ){		
+		
+
+		switch( IMAP_MARK_AFTER_PROCESS ){
+
+			case 'seen' : 
+				$this->mailbox->markMailAsRead( $uid );
+			break;
+
+			case 'unseen' : 
+				$this->mailbox->markMailAsUnread( $uid );
+			break;
+
+			default : 	
+				if ( IMAP_PROCESS_ONLY_UNSEEN ) {
+					$this->mailbox->markMailAsUnread( $uid );
+					return;
+				} 
+
+				if ( !is_null( $header ) ) {
+					
+					if ( $header->seen == 0) {
+						$this->mailbox->markMailAsUnread( $uid );
+						return;
+					} else {
+						$this->mailbox->markMailAsRead( $uid );
+						return;
+					}
+				}
+
+
+			break;	
 		}
 
 	}
-	
+
 	/**
 	* Pobiera triggery
 	*/

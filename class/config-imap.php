@@ -37,6 +37,52 @@ if ( !defined( 'IMAP_DB_TABLE_AUTOCREATE_ON_TEST')){
 }
 
 
+if ( !defined( 'IMAP_PROCESS_ONLY_UNSEEN')){
+	/**
+	* Przetwarzanie tylko nowych ( nieprzeczytanych wiadomości)
+	*/
+	define( 'IMAP_PROCESS_ONLY_UNSEEN', false );
+}
+
+
+if ( !defined( 'IMAP_MARK_AFTER_PROCESS')){
+	/**
+	* Nadawanie flagi przeczytana dla przetworzonych wiadomości
+	*/
+	define( 'IMAP_MARK_AFTER_PROCESS', 'seen' );
+}
+
+
+if ( !defined( 'IMAP_DEFAULT_ACTION_CLASS')){
+	/**
+	* Nadawanie flagi przeczytana dla przetworzonych wiadomości
+	*/
+	define( 'IMAP_DEFAULT_ACTION_CLASS', 'def\def\fede' );
+}
+
+
+if ( !defined( 'IMAP_GET_VAR_NAME' ) ){
+	/**
+	* Nadawanie flagi przeczytana dla przetworzonych wiadomości
+	*/
+	define( 'IMAP_GET_VAR_NAME', 'gaadImapCode' );
+}
+
+if ( !defined( 'IMAP_GET_READER_CODE' ) ){
+	/**
+	* Nadawanie flagi przeczytana dla przetworzonych wiadomości
+	*/
+	define( 'IMAP_GET_READER_CODE', '2432-fd32-4s5l-fds2' );
+}
+
+if ( !defined( 'IMAP_GET_WORKER_CODE' ) ){
+	/**
+	* Nadawanie flagi przeczytana dla przetworzonych wiadomości
+	*/
+	define( 'IMAP_GET_WORKER_CODE', '4s5l-fds2-2432-fd32' );
+}
+
+
 
 
 

@@ -27,7 +27,9 @@ class imapToDo {
 
 		$check = "SELECT *  FROM `imw_todo` WHERE `mailbox_id` = " . $input['mailbox_id'] . " AND `email_id` = ". $input['email_id'] ." AND `action_id` = ". $input['action_id'];
 		$r = $wpdb->get_results( $check, ARRAY_A);
-		if ( is_array( $r ) && !empty( $r )) {
+		$task_exists = is_array( $r ) && !empty( $r );
+		
+		if ( $task_exists ) {
 			log::write( array(
 				'msg' => 'proba ponownego dodania maila: '.$input['mailbox_id'].':'.$input['email_id'].':'. $input['action_id'] 
 			));

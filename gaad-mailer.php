@@ -14,7 +14,7 @@
  * @since 1.0.0
  */
 
-
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 if ( ! defined( 'ABSPATH' ) ) exit;
 ini_set('max_execution_time', 60*10); //10 minutes
 

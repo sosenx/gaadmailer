@@ -41,7 +41,7 @@ class imapTriggers {
 	function getTriggersFromDB(){		
 		global $wpdb;
 		$triggers_table_name = IMAP_DB_TABLE_PREFIX . 'triggers';
-		$r = $wpdb->get_results( "SELECT * FROM `" . $triggers_table_name . "`", ARRAY_A );
+		$r = $wpdb->get_results( "SELECT * FROM `" . $triggers_table_name . "` WHERE `active` > 0", ARRAY_A );
  		$max = count( $r );
  		$t = array();
 
