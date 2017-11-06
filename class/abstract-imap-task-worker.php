@@ -5,8 +5,14 @@ namespace imapwatch;
 * Szablon dla klas wykonujacych konkretne zadania pochodzace z listy todo
 * Klasa ta musi być samodzielna ale dobrzy by byo jakby bazowaa na tej abstrakcji
 */
+
+
 abstract class imapTaskWorker {
 	
+/*
+* 
+*/
+	private $respondTo;
 	private $mailbox_id;
 	private $email_id;
 	private $config;
@@ -71,6 +77,34 @@ abstract class imapTaskWorker {
 
 
 	/**
+	* Wysyą wiadomość ze skompletowanych danych
+	*/
+	function sendResponse( ){
+		$mail = new \PHPMailer\PHPMailer\PHPMailer();
+
+		$mail->setFrom('from@example.com', 'Your Name');
+		$mail->addAddress('bartekSosnowski711@gmail.com', 'My Friend');
+		$mail->Subject  = 'First PHPMailer Message';
+		$mail->Body     = $this->parsedResponseTemplate;
+
+		if(!$mail->send()) {
+		  echo 'Message was not sent.';
+		  echo 'Mailer error: ' . $mail->ErrorInfo;
+		} else {
+		  echo 'Message has been sent.';
+		}
+		$a= 1;
+
+	}
+/**
+	* Przeglada kolejne czescie wiadomosci i szuka za pomoca regul pasujkacych elementow
+	*/
+	function setRespondTo( string $email_adress ){
+		$this->respondTo = $email_adress;
+	}
+
+
+/**
 	* Przeglada kolejne czescie wiadomosci i szuka za pomoca regul pasujkacych elementow
 	*/
 	function getMessageData(  ){
@@ -275,9 +309,17 @@ $r=1;
 			}	
 			$this->markExecuted();
 		}
-		
-		
+	}
 
+	/**
+	* Funkcja ma zadanie wybrac i zwrocic adres email na który ma zostać wysana odpowiedź.php
+	*
+	* Adres email powinien zostać pobrany z tresci za pomocą Rule (konfiguracja zasad)
+	* Zakądamy, że wiadomości (triggery) będą miay stalą, przewidywalną tresc, więc przy
+	* odpowiednio skonfigurowanych zasadach dame bedą zawsze w tym samym miejscu tablicy message_data
+	*/
+	function acquire_reciever( ){					
+		return IMAP_ADMIN_EMAIL;
 	}
 }
 

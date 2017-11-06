@@ -3,6 +3,15 @@ namespace imapwatch;
 
 
 
+if ( !defined( 'IMAP_ADMIN_EMAIL')){
+	/**
+	* email administratora
+	*/
+	define( 'IMAP_ADMIN_EMAIL', 'b.sosnowski@c-p.com.pl' );
+}
+
+
+
 if ( !defined( 'IMAP_ROOT_DIR')){
 	/**
 	* Katalog glowny

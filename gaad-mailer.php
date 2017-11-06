@@ -14,7 +14,7 @@
  * @since 1.0.0
  */
 
-error_reporting(E_ERROR | E_WARNING | E_PARSE);
+
 if ( ! defined( 'ABSPATH' ) ) exit;
 ini_set('max_execution_time', 60*10); //10 minutes
 
@@ -27,6 +27,9 @@ if ( !defined( 'GMAILER_ENV'))                    define( 'GMAILER_ENV',        
 
 if ( !defined( 'WCM_PLUGIN_NAME'))                define( 'WCM_PLUGIN_NAME',              trim(dirname(plugin_basename(__FILE__)), '/') );
 if ( !defined( 'GMAILER_DIR' ) )                  define( 'GMAILER_DIR',                  plugin_dir_path( __FILE__) );
+if ( !defined( 'GMAILER_VENDOR_DIR' ) )           define( 'GMAILER_VENDOR_DIR',           GMAILER_DIR .'/vendor' );
+
+if ( !defined( 'GMAILER_AUTOLOAD' ) )             define( 'GMAILER_AUTOLOAD',             GMAILER_VENDOR_DIR . '/autoload.php');
 if ( !defined( 'GMAILER_THEME_FILES_DIR' ) )      define( 'GMAILER_THEME_FILES_DIR',      GMAILER_DIR . 'theme_files' );
 if ( !defined( 'WCM_PLUGIN_APP_TEMPLATES_DIR' ) ) define( 'WCM_PLUGIN_APP_TEMPLATES_DIR', GMAILER_DIR . 'templates' );
 if ( !defined( 'WCM_PLUGIN_DIR') )                define( 'WCM_PLUGIN_DIR',               GMAILER_DIR . '/' . WCM_PLUGIN_NAME );
@@ -34,12 +37,13 @@ if ( !defined( 'WCM_PLUGIN_URL') )                define( 'WCM_PLUGIN_URL',     
 if ( !defined( 'GMAILER_FORCE_FILES_UPDATED') )   define( 'GMAILER_FORCE_FILES_UPDATED',  true );
 
 // Load plugin class files
+require_once( GMAILER_AUTOLOAD );
 require_once( 'class/class-wcm-hooks-mng.php' );
 require_once( 'inc/class-wcm-filters.php' );
 require_once( 'inc/class-wcm-actions.php' );
 require_once( 'class/class-rest-api.php' );  
 require_once( 'inc/class-wcm-admin-actions.php' );
-require_once( 'vendor/autoload.php' );
+
 
 require_once( 'class/abstract-imap-watch.php' );
 
