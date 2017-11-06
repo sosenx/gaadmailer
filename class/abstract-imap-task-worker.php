@@ -44,7 +44,7 @@ abstract class imapTaskWorker {
 	/*
 	* Przechowuje dane zebrane za pomoca regul
 	*/
-	private $message_data = array(
+	public $message_data = array(
 		'header' => array(),
 		'text_plain' => array(),
 		'html_body' => array()
@@ -214,6 +214,29 @@ abstract class imapTaskWorker {
 		$this->{$type}[ $slug ] = $rule_data;
 	}
 
+	/**
+	* parseTemplateCb
+	*/
+	public static function parseTemplateCallback( string $buffer ){
+		return $buffer;
+	}
+
+	/**
+	* parseTemplate
+	*/
+	function parseTemplate( array $param_arr = NULL ){
+		$tpl_dir = IMAP_EMAILS_TEMPLATES_DIR . $this->actionConfig['template']['file'] . '/';		
+		$tpl_index = $tpl_dir . 'index.php';
+		if ( is_file( $tpl_index ) ) {
+
+			ob_start("\imapwatch\imapTaskWorker::parseTemplateCallback");
+			include( $tpl_index );				
+			$parsedTemplate = ob_get_flush();
+$r=1;
+
+		}
+		
+	}
 
 
 	/**
@@ -247,7 +270,8 @@ abstract class imapTaskWorker {
 		if ( !$this->isExecuted() ) {
 			
 			foreach ($this->operations as $key => $value) {
-				call_user_func_array( $value[0], $value[1]);
+				$args = !is_null( $value[1] ) ? $value[1] : array();
+				call_user_func_array( $value[0], $args );
 			}	
 			$this->markExecuted();
 		}

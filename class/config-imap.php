@@ -10,6 +10,16 @@ if ( !defined( 'IMAP_ROOT_DIR')){
 	define( 'IMAP_ROOT_DIR', \GMAILER_DIR . '/class/' );
 }
 
+if ( !defined( 'IMAP_EMAILS_TEMPLATES_DIR')){
+	/**
+	* Katalog glowny
+	*/
+	define( 'IMAP_EMAILS_TEMPLATES_DIR', \WCM_PLUGIN_APP_TEMPLATES_DIR . '/imap-watch/emails/' );
+}
+
+
+
+
 if ( !defined( 'IMAP_WATCH_ENV')){
 	/**
 	* Tryby dzialania aplikacji:

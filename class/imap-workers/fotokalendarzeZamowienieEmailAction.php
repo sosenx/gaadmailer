@@ -15,7 +15,7 @@ public $r = 3;
 		$this->addRules();
 
 		
-		$this->addOperation( array($this, "step2"), array( $this, "six")  );
+		$this->addOperation( array( $this, "parseTemplate") );
 		$this->addOperation( array($this, "step3"), array("seven", "eight")  );
 
 			return $this;
