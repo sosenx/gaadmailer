@@ -4,16 +4,20 @@ namespace imapwatch;
 *
 */
 require_once( 'class-imap-task.php' );
+require_once( 'abstract-imap-task-worker.php' );
 
 class imapWorker {
 	
 	private $todos;
+	public $config;
 	/**
 	*
 	*/
-	function __construct(){
-		
+	function __construct( array $config ){
+		$this->configure( $config );
 		$this->getTodos();
+		
+		$this->process();
 		return $this;
 	}
 
@@ -32,6 +36,43 @@ class imapWorker {
 			}
 		}
 	}	
+
+
+
+	/**
+	* Zapisuje konfiguracje i uruchamia inne metody komplementujace klasę
+	*/
+	function process( ){
+		foreach ($this->todos as $key => $task) {
+			$taskExecutor = $task->getPhpClass();
+			$taskExecutor->executeTask();
+			}
+		
+	}
+
+	/**
+	* Zapisuje konfiguracje i uruchamia inne metody komplementujace klasę
+	*/
+	function configure( array $config_array ){
+		$this->config = $config_array;
+		$this->addRegisteredWorkers();
+	}
+
+
+	/**
+	* Tworzy listę obsugiwanych przez Imap Watcher skrzynek
+	*/
+	function addRegisteredWorkers( ){
+		$workers = $this->config[ 'workers' ];
+		foreach ($workers as $i => $workerClassFile) {
+
+			try {				
+				require_once( GMAILER_DIR . '/class/'. $workerClassFile );
+			} catch (Exception $e) {
+			    echo 'Worker file is missing: \''.$workerClassFile.'\'',  $e->getMessage(), "\n";
+			}
+		}
+	}
 }
 
 

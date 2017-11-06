@@ -11,6 +11,7 @@ class imapTask {
 	private $action;
 	private $phpClass;
 	private $phpClassExists;
+	private $executor;
 	/**
 	*
 	*/
@@ -21,13 +22,26 @@ class imapTask {
 		return $this;
 	}
 
+
+		/**
+	*
+	*/
+	function getPhpClass( ){
+		if ( $this->phpClassExists ) {
+			$this->executor = new $this->phpClass( $this->action['config'] );
+			return $this->executor;
+		}
+
+		return parent::__construct();
+	}
+
 	/**
 	*
 	*/
 	function parseAction( string $json ){
 		$this->action = json_decode( $json, true );
 		$this->phpClass = $this->action[ 'php-class' ];
-		$this->phpClassExists = class_exists( str_replace( '\\', '\\\\', $this->phpClass));
+		$this->phpClassExists = class_exists( $this->phpClass );
 		return $this->action;
 	}
 	

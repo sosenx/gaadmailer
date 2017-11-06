@@ -3,6 +3,7 @@ namespace imapwatch;
 
 require_once( 'config-imap.php' );
 
+
 require_once( 'class-imap-log.php' );
 if( IMAP_WATCH_ENV === 'PRESTART' || IMAP_WATCH_ENV === 'DEV'){ require_once( 'class-imap-dev-log.php' ); }
 
