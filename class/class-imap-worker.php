@@ -43,7 +43,11 @@ class imapWorker {
 	* Zapisuje konfiguracje i uruchamia inne metody komplementujace klasę
 	*/
 	function process( ){
-		foreach ($this->todos as $key => $task) {
+		if ( is_null( $this->todos ) ) {
+			return false;
+		}
+		
+		foreach ( $this->todos as $key => $task) {
 			$taskExecutor = $task->getPhpClass();
 			$taskExecutor->executeTask();
 			}

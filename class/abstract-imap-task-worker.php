@@ -83,15 +83,18 @@ abstract class imapTaskWorker {
 		$mail = new \PHPMailer\PHPMailer\PHPMailer();
 
 		$mail->setFrom('from@example.com', 'Your Name');
-		$mail->addAddress('bartekSosnowski711@gmail.com', 'My Friend');
-		$mail->Subject  = 'First PHPMailer Message';
+		$mail->addAddress( $this->respondTo );
+		$mail->Subject  = 'To dziala!!!!';
 		$mail->Body     = $this->parsedResponseTemplate;
+		$mail->IsHTML(true);
+		$mail->CharSet = 'UTF-8';
 
 		if(!$mail->send()) {
 		  echo 'Message was not sent.';
 		  echo 'Mailer error: ' . $mail->ErrorInfo;
 		} else {
 		  echo 'Message has been sent.';
+		  $this->setStatus('response sent: ' . $this->respondTo);
 		}
 		$a= 1;
 
@@ -99,9 +102,19 @@ abstract class imapTaskWorker {
 /**
 	* Przeglada kolejne czescie wiadomosci i szuka za pomoca regul pasujkacych elementow
 	*/
+	function setStatus( string $status ){
+		global $wpdb;
+		$r = $wpdb->update( IMAP_DB_TABLE_PREFIX . 'todo', array('status' => $status ), array( 'id' => $this->config['id']) );
+		$s=1;
+	}
+
+	/**
+	* Przeglada kolejne czescie wiadomosci i szuka za pomoca regul pasujkacych elementow
+	*/
 	function setRespondTo( string $email_adress ){
 		$this->respondTo = $email_adress;
 	}
+
 
 
 /**
