@@ -27,7 +27,7 @@ class imapWorker {
 	function getTodos(){		
 		global $wpdb;		
 		$table_name = IMAP_DB_TABLE_PREFIX . 'todo';
-		$r = $wpdb->get_results( "SELECT * FROM `" . $table_name . "` WHERE `status` LIKE 'added' LIMIT 0, 10", ARRAY_A );
+		$r = $wpdb->get_results( "SELECT * FROM `" . $table_name . "` WHERE `status` LIKE 'added' LIMIT 0, 2", ARRAY_A );
  		$max = count( $r );
 
 		if ( is_array( $r ) && $max > 0) {
@@ -46,7 +46,7 @@ class imapWorker {
 		if ( is_null( $this->todos ) ) {
 			return false;
 		}
-		
+
 		foreach ( $this->todos as $key => $task) {
 			$taskExecutor = $task->getPhpClass();
 			$taskExecutor->executeTask();
