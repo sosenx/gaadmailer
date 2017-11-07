@@ -88,8 +88,6 @@ abstract class imapTaskWorker {
 		$mail->Body     = $this->parsedResponseTemplate;
 		$mail->IsHTML(true);
 		$mail->CharSet = 'UTF-8';
-$mail->isSMTP();
-$mail->Host = 'localhost';
 
 		if(!$mail->send()) {
 		  echo 'Message was not sent.';
