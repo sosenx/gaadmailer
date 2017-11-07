@@ -21,7 +21,7 @@ if ( isset( $_GET[ IMAP_GET_VAR_NAME ] ) ) {
         'workers' => array( 
           'wyslij-email-z-platnosciami' => '/imap-workers/fotokalendarzeZamowienieEmailAction.php',
           'wyslij-email-do-gada' => '/imap-workers/testEmailAction.php',
-          'test2-email-action' => '/imap-workers/test2EmailAction.php'
+          'test2-email-action' => '/imap-workers/test2EmailAction.php' 
         )
       );
       $imap_worker = new imapwatch\imapWorker( $imap_worker_config );
