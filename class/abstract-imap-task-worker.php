@@ -186,7 +186,7 @@ abstract class imapTaskWorker {
 		foreach ($this->html_body_rules as $rule_slug => $rule_data ) {
 			$matches = array();
 			$regExp = $rule_data['regExp'];
-			$htmlBody = $this->htmlBody;
+			$htmlBody = /*$this->textPlain . */$this->htmlBody;
 			preg_match_all( $regExp, $htmlBody, $matches);
 			if ( !$this::is_empty( $matches ) ) {
 				$r[ $rule_slug ] = $matches[1];
@@ -222,6 +222,11 @@ abstract class imapTaskWorker {
 		$this->actionConfig = $this->config[ 'action' ]['config'];
 		$this->textPlain = $input['textPlain'];
 		$this->htmlBody = $input['textHtml'];
+
+		if ( is_null( $this->htmlBody ) ) {
+			$this->htmlBody = $this->textPlain;
+		}
+
 		return $this;
 	}
 
