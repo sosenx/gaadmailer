@@ -163,7 +163,7 @@ abstract class imapTaskWorker {
 		$r = array();
 		foreach ($this->text_plain_rules as $rule_slug => $rule_data ) {
 			$matches = array();
-			preg_match_all( $rule_data['regExp'], $this->textPlain, $matches);
+			@preg_match_all( $rule_data['regExp'], $this->textPlain, $matches);
 			if ( !$this::is_empty( $matches ) ) {
 				$r[ $rule_slug ] = $matches;
 			}			
