@@ -91,7 +91,7 @@ abstract class imapTaskWorker {
 /**/
 		$mail->SMTPDebug = 2; //Alternative to above constant
 		$mail->IsSMTP();
-	    $mail->Host = "smtp.dpoczta.pl";
+	    $mail->Host = "localhost";
 	    $mail->Port = 25;
 			$mail->SMTPAuth = true;
 			$mail->SMTPSecure = false;		
