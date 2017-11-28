@@ -89,6 +89,7 @@ abstract class imapTaskWorker {
 		$mail->IsHTML(true);
 		$mail->CharSet = 'UTF-8';
 /**/
+		$mail->SMTPDebug = 2; //Alternative to above constant
 		$mail->IsSMTP();
 	    $mail->Host = "smtp.dpoczta.pl";
 	    $mail->Port = 25;
