@@ -88,7 +88,7 @@ abstract class imapTaskWorker {
 		$mail->Body     = $this->parsedResponseTemplate;
 		$mail->IsHTML(true);
 		$mail->CharSet = 'UTF-8';
-
+/*
 		$mail->IsSMTP();
 	    $mail->Host = "smtp.dpoczta.pl";
 	    $mail->Port = 25;
@@ -97,7 +97,7 @@ abstract class imapTaskWorker {
 	    $mail->Username = "test@antykimarki.pl"; 
 	    $mail->Password = "r52be2Sc3bEX"; 
 	    $mail->From = "test@antykimarki.pl";
-
+*/
 		if(!$mail->send()) {
 		  echo 'Message was not sent.';
 		  echo 'Mailer error: ' . $mail->ErrorInfo;
