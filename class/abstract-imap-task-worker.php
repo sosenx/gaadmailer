@@ -90,13 +90,13 @@ abstract class imapTaskWorker {
 		$mail->CharSet = 'UTF-8';
 /**/
 		$mail->IsSMTP();
-	    $mail->Host = "localhost";
+	    $mail->Host = "smtp.dpoczta.pl";
 	    $mail->Port = 25;
 			$mail->SMTPAuth = false;
 			$mail->SMTPSecure = false;		
-	    $mail->Username = "test@antykimarki.pl"; 
+	    $mail->Username = "tes@antykimarki.pl"; 
 	    $mail->Password = "r52be2Sc3bEX"; 
-	    $mail->From = "test@antykimarki.pl";
+	    $mail->From = "tes@antykimarki.pl";
 
 		if(!$mail->send()) {
 		  echo 'Message was not sent.';
