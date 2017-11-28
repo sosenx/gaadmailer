@@ -91,7 +91,9 @@ abstract class imapTaskWorker {
 
 		$mail->IsSMTP();
 	    $mail->Host = "smtp.dpoczta.pl";
-	    $mail->SMTPAuth = true;
+	    $mail->Port = 25;
+			$mail->SMTPAuth = false;
+			$mail->SMTPSecure = false;		
 	    $mail->Username = "test@antykimarki.pl"; 
 	    $mail->Password = "r52be2Sc3bEX"; 
 	    $mail->From = "test@antykimarki.pl";
