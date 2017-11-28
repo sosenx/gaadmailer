@@ -5,3 +5,4 @@ dist/gzip
 vendor
 tmp
 docs
+wp-config.php

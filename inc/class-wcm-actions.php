@@ -101,16 +101,19 @@ class wcm_actions {
   }
   
   public static function put_templates( $dir ){
+    global $post;
     $tpl_dir = opendir( $dir = str_replace( '\\', '/', $dir ) );
-    while ($f = readdir($tpl_dir) ){
+    $post_slug = $post->post_name; 
+
+    while ( $f = readdir($tpl_dir) ){
       $id = array();
       preg_match('/(.*)[\.]{1}.*$/', $f, $id);
       $id = basename( $dir ) . '-' . empty( $id ) ? $f : $id[ 1 ];
      
       $template = $dir . '/'.$f;      
       if( is_file( $template ) ){
-
-        ?><script type="template/javascript" id="<?php echo $id; ?>"><?php require_once( $template ); ?></script><?php
+        $template_id = $post_slug . '-' . str_replace( '-php', '', sanitize_title( $id ) );
+        ?><script type="template/javascript" id="<?php echo $template_id; ?>"><?php require_once( $template ); ?></script><?php
       }
       
     }

@@ -22,7 +22,7 @@ class imapWorker {
 	}
 
 	/**
-	* Tworzy listę obsugiwanych przez Imap Watcher skrzynek
+	* Pobiera taski i tworzy ich instancje
 	*/
 	function getTodos(){		
 		global $wpdb;		
@@ -37,10 +37,8 @@ class imapWorker {
 		}
 	}	
 
-
-
 	/**
-	* Zapisuje konfiguracje i uruchamia inne metody komplementujace klasę
+	* Wykonuje zabrane zadania
 	*/
 	function process( ){
 		if ( is_null( $this->todos ) ) {
