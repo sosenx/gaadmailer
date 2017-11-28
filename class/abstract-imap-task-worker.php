@@ -95,9 +95,9 @@ abstract class imapTaskWorker {
 	    $mail->Port = 25;
 			$mail->SMTPAuth = true;
 			$mail->SMTPSecure = false;		
-	    $mail->Username = "tes@antykimarki.pl"; 
-	    $mail->Password = "r52be2Sc3bEX"; 
-	    $mail->From = "tes@antykimarki.pl";
+	    $mail->Username = "zamowienia@fotokalendarze2018.pl"; 
+	    $mail->Password = "7lho848EcaP4"; 
+	    $mail->From = "zamowienia@fotokalendarze2018.pl";
 
 		if(!$mail->send()) {
 		  echo 'Message was not sent.';
