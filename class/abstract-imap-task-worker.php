@@ -89,6 +89,13 @@ abstract class imapTaskWorker {
 		$mail->IsHTML(true);
 		$mail->CharSet = 'UTF-8';
 
+		$mail->IsSMTP();
+	    $mail->Host = "smtp.dpoczta.pl";
+	    $mail->SMTPAuth = true;
+	    $mail->Username = "test@antykimarki.pl"; 
+	    $mail->Password = "r52be2Sc3bEX"; 
+	    $mail->From = "test@antykimarki.pl";
+
 		if(!$mail->send()) {
 		  echo 'Message was not sent.';
 		  echo 'Mailer error: ' . $mail->ErrorInfo;
@@ -284,8 +291,6 @@ abstract class imapTaskWorker {
 			ob_start("\imapwatch\imapTaskWorker::parseTemplateCallback");
 			include( $tpl_index );				
 			$this->parsedResponseTemplate = ob_get_flush();
-$r=1;
-
 		}
 		
 	}
