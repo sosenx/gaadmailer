@@ -78,7 +78,6 @@ abstract class imapWatch{
 		foreach ($this->mail_boxes_data as $key => $value) {
 			$this->mail_boxes[ $key ] = new imapMailbox( $value, $this );
 		}
-		$r=1;
 	}
 
 

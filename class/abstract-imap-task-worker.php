@@ -82,23 +82,26 @@ abstract class imapTaskWorker {
 	function sendResponse( ){
 		$mail = new \PHPMailer\PHPMailer\PHPMailer();
 
-		$mail->setFrom('from@example.com', 'Your Name');
+		//$mail->setFrom('from@example.com', 'Your Name');
 		$mail->addAddress( $this->respondTo );
 		$mail->Subject  = 'Odpowiedz na maila z imapwatch';
 		$mail->Body     = $this->parsedResponseTemplate;
 		$mail->IsHTML(true);
 		$mail->CharSet = 'UTF-8';
-/*
-		$mail->SMTPDebug = 2; //Alternative to above constant
+
+		//$mail->SMTPDebug = 2; //Alternative to above constant
 		$mail->IsSMTP();
-	    $mail->Host = "localhost";
+
+
+		
+	    $mail->Host = "smtp.dpoczta.pl";
 	    $mail->Port = 25;
 			$mail->SMTPAuth = true;
 			$mail->SMTPSecure = false;		
 	    $mail->Username = "zamowienia@fotokalendarze2018.pl"; 
 	    $mail->Password = "7lho848EcaP4"; 
 	    $mail->From = "zamowienia@fotokalendarze2018.pl";
-*/
+
 		if(!$mail->send()) {
 		  echo 'Message was not sent.';
 		  echo 'Mailer error: ' . $mail->ErrorInfo;
