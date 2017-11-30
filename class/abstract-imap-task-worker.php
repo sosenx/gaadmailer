@@ -295,8 +295,11 @@ abstract class imapTaskWorker {
 		if ( is_file( $tpl_index ) ) {
 
 			ob_start("\imapwatch\imapTaskWorker::parseTemplateCallback");
-			include( $tpl_index );				
-			$this->parsedResponseTemplate = ob_get_flush();
+			include( $tpl_index );		
+
+			$ob_flush = ob_get_flush();			
+			$this->parsedResponseTemplate = $this->wrap( 'div', $ob_flush, array( 'style' => 'opacity:.5;' ) );
+$a=1;
 		}
 		
 	}
@@ -307,6 +310,26 @@ abstract class imapTaskWorker {
 	*/
 	function addOperation( array $function, array $param_arr = NULL ){
 		$this->operations[] = array( $function, $param_arr);
+	}
+
+
+	/**
+	* Zwraca html w podanym wrapperze
+	*/
+	function wrap( string $element, string $content, array $param_arr = NULL ){
+		$e_html = array( '<', $element );
+
+		if ( is_array( $param_arr) && !empty( $param_arr ) ) {
+			foreach ($param_arr as $key => $value) {
+				$e_html[] = ' ' . $key . '="'. $value .'" ';
+
+			}
+		}	
+		$e_html[] = '>';
+		$e_html[] = $content;
+		$e_html[] = '</div>';
+
+		return implode( "", $e_html );
 	}
 
 

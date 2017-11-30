@@ -1,0 +1,795 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"padd",
+				"padding-top"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"tra",
+				"transform"
+			],
+			[
+				"margi",
+				"margin-bottom"
+			],
+			[
+				"padding",
+				"padding-bottom"
+			],
+			[
+				"marg",
+				"margin-top"
+			],
+			[
+				"zin",
+				"z-index"
+			],
+			[
+				"backgr",
+				"background-color"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"he",
+				"height"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"box-s",
+				"box-shadow"
+			],
+			[
+				"pad",
+				"padding-left"
+			],
+			[
+				"colo",
+				"color__grey--light\t config.less"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"color",
+				"color__primary\t config.less"
+			],
+			[
+				"line",
+				"line-height"
+			],
+			[
+				"font",
+				"font-weight"
+			],
+			[
+				"color__text",
+				"color__text--light\t config.less"
+			],
+			[
+				"font-s",
+				"font-size"
+			],
+			[
+				"ali",
+				"align-items"
+			],
+			[
+				"dis",
+				"display"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "<?php\nnamespace imapwatch;\n/**\n*\n*/\nrequire_once( 'class-email.php' );\n\nclass imapMailbox{\n\n\tprivate $id;\n\tprivate $host;\n\tprivate $login;\n\tprivate $pass;\n\tprivate $mailbox;\n\tpublic $parentObj;\n\n\t/**\n\t*\n\t*/\n\tfunction __construct( array $input, $parentObj ){\n\t\tif($this->parseInput( $input )){\n\t\t\t$this->mailbox = new \\PhpImap\\Mailbox( $this->host, $this->login, $this->pass, __DIR__);\n\t\t\t$this->id = $input[ 'id' ];\n\t\t\t$this->parentObj = $parentObj;\n\n\t\t\t/*\n\t\t\t* Sprawdzanie skrzynki \n\t\t\t*/\n\t\t\t$this->checkMailbox();\n\t\t\t \n\t\t} \n\t\treturn $this;\n\t}\n\n\t/**\n\t*\n\t*/\n\tfunction checkMailbox(){\n\t\t$this->mailbox = new \\PhpImap\\Mailbox( $this->host, $this->login, $this->pass, __DIR__);\n\t\t$mailsIds = $this->mailbox->searchMailbox( 'ALL' );\n\t\t$triggers = $this->getTriggers();\n\t\t$emailsInfo = $this->mailbox->getMailsInfo( $mailsIds );\n\t\t\n\t\tforeach ($emailsInfo as $key => $header) {\t\n\t\t\tif ( IMAP_PROCESS_ONLY_UNSEEN && $header->seen === 1 ) {\n\t\t\t\tcontinue;\n\t\t\t}\t\t\n\n\t\t\tforeach ($triggers as $tkey => $trigger) {\n\t\t\t\t/*\n\t\t\t\t* Sprawdzanie, czy wiadomosc pasuje do triggera\n\t\t\t\t*/\t\n\t\t\t\t\n\t\t\t\tif ( (int)$this->id !== (int)$trigger->mailbox_id) {\n\t\t\t\t\tcontinue;\n\t\t\t\t}\t\n\t\t\t\telseif ( $trigger->check( $header ) ) {\n\t\t\t\t\t$mail = $this->mailbox->getMail( $header->uid );\n\t\t\t\t\t$this->parentObj->getTodos()->add( \n\t\t\t\t\t\tarray(\n\t\t\t\t\t\t\t'mailbox_id' => $trigger->mailbox_id, \n\t\t\t\t\t\t\t'email_id' => $header->uid,\n\t\t\t\t\t\t\t'action_id' => $trigger->action_id,\n\t\t\t\t\t\t\t'action' => $this->getAction( $trigger->action_id )->toJSON(), \n\t\t\t\t\t\t\t'header' => json_encode( $header ), \n\t\t\t\t\t\t\t'textPlain' => $mail->textPlain,\n\t\t\t\t\t\t\t'textHtml' => $mail->textHtml\n\t\t\t\t\t\t)\n\t\t\t\t\t);\t\t\t\t\n\n\t\t\t\t\t$this->markEmailAfterProcess( $header->uid, $header );\n\n\t\t\t\t}\t\t\t\t\n\t\t\t}\n\t\t}\n\t}\n\t\n\n\t/**\n\t* Flaguje wiadomość w zależności od ustawienia stalej IMAP_MARK_AFTER_PROCESS\n\t*\n\t* @param int $uid Id wiadomości email\n\t*/\n\tfunction markEmailAfterProcess( int $uid, $header = NULL ){\t\t\n\t\t\n\n\t\tswitch( IMAP_MARK_AFTER_PROCESS ){\n\n\t\t\tcase 'seen' : \n\t\t\t\t$this->mailbox->markMailAsRead( $uid );\n\t\t\tbreak;\n\n\t\t\tcase 'unseen' : \n\t\t\t\t$this->mailbox->markMailAsUnread( $uid );\n\t\t\tbreak;\n\n\t\t\tdefault : \t\n\t\t\t\tif ( IMAP_PROCESS_ONLY_UNSEEN ) {\n\t\t\t\t\t$this->mailbox->markMailAsUnread( $uid );\n\t\t\t\t\treturn;\n\t\t\t\t} \n\n\t\t\t\tif ( !is_null( $header ) ) {\n\t\t\t\t\t\n\t\t\t\t\tif ( $header->seen == 0) {\n\t\t\t\t\t\t$this->mailbox->markMailAsUnread( $uid );\n\t\t\t\t\t\treturn;\n\t\t\t\t\t} else {\n\t\t\t\t\t\t$this->mailbox->markMailAsRead( $uid );\n\t\t\t\t\t\treturn;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\n\t\t\tbreak;\t\n\t\t}\n\n\t}\n\n\t/**\n\t* Pobiera triggery\n\t*/\n\tfunction getAction( int $actionId ){\t\t\n\t\treturn $this->parentObj->getAction( $actionId );\t\t\n\t}\n\n\t/**\n\t* Pobiera triggery\n\t*/\n\tfunction getTriggers(){\t\t\n\t\treturn $this->parentObj->getTriggers( $this->id );\t\t\n\t}\n\n\t/**\n\t*\n\t*/\n\tfunction getParentObj(){\t\t\n\t\treturn $this->parentObj;\n\t}\n\n\n\n\t/**\n\t*\n\t*/\n\tfunction parseInput( array $input ){\n\t\tif ( is_array( $input )) {\n\t\t\tif ( !is_null( $input[ 'host' ] ) ) {\n\t\t\t\t$this->host = $input[ 'host' ];\n\t\t\t}\n\t\t\tif ( !is_null( $input[ 'login' ] ) ) {\n\t\t\t\t$this->login = $input[ 'login' ];\n\t\t\t}\n\t\t\tif ( !is_null( $input[ 'pass' ] ) ) {\n\t\t\t\t$this->pass = $input[ 'pass' ];\n\t\t\t}\n\t\t}\n\t\treturn true;\n\t}\n\n}\n\n\n?>",
+			"file": "class/class-imap-mailbox.php",
+			"file_size": 3311,
+			"file_write_time": 131563427036773468,
+			"settings":
+			{
+				"buffer_size": 3146,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "class/abstract-imap-task-worker.php",
+			"settings":
+			{
+				"buffer_size": 8075,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "gaadmailer.sublime-project",
+			"settings":
+			{
+				"buffer_size": 216,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows",
+				"name": "Xdebug Context",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"contents": "",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows",
+				"name": "Xdebug Watch",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"contents": "",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows",
+				"name": "Xdebug Stack",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"contents": "=> C:\\xampp7\\htdocs\\gm\\wp-content\\plugins\\gaadmailer\\class\\class-imap-mailbox.php\n\t|+| 40\n=> C:\\xampp7\\htdocs\\gm\\wp-content\\plugins\\gaadmailer\\class\\class-imap-prestart.php\n\t|+| 23\n",
+			"settings":
+			{
+				"buffer_size": 181,
+				"line_ending": "Windows",
+				"name": "Xdebug Breakpoint",
+				"read_only": true,
+				"scratch": true
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 170.0,
+		"last_filter": "install",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"git",
+				"Git: Status"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Install Package Control"
+			],
+			[
+				"pack",
+				"Install Package Control"
+			]
+		],
+		"width": 420.0
+	},
+	"console":
+	{
+		"height": 655.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"clr",
+			"clear",
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"git status",
+			"git status\\",
+			"console.cls()",
+			"console.clear()",
+			"cls",
+			"clear",
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/xampp7/htdocs/gm/wp-content/plugins/gaadmailer",
+		"/C/xampp7/htdocs/gm/wp-content/plugins/gaadmailer/class"
+	],
+	"file_history":
+	[
+		"/C/xampp7/htdocs/gm/wp-config.php",
+		"/C/xampp7/htdocs/gm/wp-content/plugins/gaadmailer/class/abstract-imap-watch.php",
+		"/C/xampp7/htdocs/gm/wp-content/plugins/gaadmailer/class/class-imap-prestart.php",
+		"/C/xampp7/htdocs/gm/wp-content/plugins/gaadmailer/vendor/php-imap/php-imap/src/PhpImap/Mailbox.php",
+		"/C/xampp7/htdocs/gm/wp-content/plugins/gaadmailer/inc/class-wcm-actions.php",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/index.html",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/assets/less/gaad/slider/slider.less",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/assets/less/gaad/style.less",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/assets/less/gaad/follow-scroll-box/follow-scroll-box.less",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/assets/less/gaad/tabs/tabs.less",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/assets/less/common/media.less",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/assets/less/vendor/owl.carousel.less",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/blocks/slider/slider.less",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/assets/less/gaad/hero/hero.less",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/blocks/hero/hero.less",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/assets/less/gaad/pricing/pricing.less",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/blocks/logo/logo.less",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/blocks/pricing/pricing.less",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/assets/less/style.less",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/assets/less/gaad/logo/logo.less",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/assets/less/gaad/menu/menu.less",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/blocks/tabs/tabs.less",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/blocks/slider/slider.js",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/gulpfile.js",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/assets/less/gaad/download-button/download-button.less",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/assets/less/common/config.less",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/assets/less/common/_normalize.less",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/.gitignore",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/assets/less/gaad/header/header.js",
+		"/C/Users/grafi/AppData/Roaming/Sublime Text 3/Packages/User/SideBarEnhancements/Open With/Side Bar.sublime-menu",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/assets/less/gaad/test.less",
+		"/C/Users/grafi/Desktop/fotokalendarze2018/template/index-2.html",
+		"/C/Users/grafi/Desktop/asapp/template/index.html",
+		"/C/Users/grafi/Desktop/asapp/template/test.js",
+		"/C/Users/grafi/Desktop/asapp/.gitignore",
+		"/C/Users/grafi/Desktop/asapp/template/.gitignore"
+	],
+	"find":
+	{
+		"height": 40.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+			"C:\\xampp7\\htdocs\\gm\\wp-content\\plugins\\gaadmailer",
+			"C:\\Users\\grafi\\Desktop\\fotokalendarze2018\\template",
+			"<open folders>,C:\\Users\\grafi\\Desktop\\fotokalendarze2018\\template",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"test_db_tables",
+			"createTable",
+			"template/javascript",
+			".section-title-wrapper",
+			"max-width: 335px;",
+			"rotate(-90deg)",
+			"@break-large-x",
+			".media-mixin",
+			"media-mixin",
+			"secondary",
+			"price-label-wrapper",
+			"label",
+			"secondary",
+			"width: 45rem !important;",
+			"45rem",
+			"Owl Carousel - Core",
+			"height:",
+			"height",
+			"\"slide",
+			"'slide'",
+			".hero",
+			"clixx-pdf",
+			"instru",
+			"slide\" +",
+			"slide\"",
+			"slide",
+			"10</div>",
+			"Lorem",
+			";\n",
+			"1.png",
+			".img",
+			" absolute;\n\t\t\tmargin-left: auto;\n\t\t\tmargin-right: auto;\n\t\t\tleft: 0;\n\t\t\tright: 0;",
+			"shadow",
+			"clixx",
+			"Take a video tour of our app",
+			";\t\t",
+			"26px",
+			"24px",
+			"header--fixed",
+			"color__text",
+			"\n@",
+			".download-button",
+			"download-button",
+			".download-button",
+			"less-plugin-glob",
+			"\"download\"",
+			"=\"download\"",
+			"download\"",
+			"download",
+			"id=\"download",
+			"section--grey",
+			"Download",
+			"maps"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": false
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "class/class-imap-mailbox.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3146,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								557,
+								557
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".#",
+									"selector": "text.html"
+								}
+							],
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2235.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "class/abstract-imap-task-worker.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8075,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1209,
+								1209
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".#",
+									"selector": "text.html"
+								}
+							],
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1296.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "gaadmailer.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 216,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								207,
+								207
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".#",
+									"selector": "text.html"
+								}
+							],
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 3,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "C:\\xampp7\\htdocs\\gm\\wp-content\\plugins\\gaadmailer",
+							"syntax": "Packages/Xdebug Client/Xdebug.tmLanguage",
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "C:\\xampp7\\htdocs\\gm\\wp-content\\plugins\\gaadmailer",
+							"syntax": "Packages/Xdebug Client/Xdebug.tmLanguage",
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 5,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "C:\\xampp7\\htdocs\\gm\\wp-content\\plugins\\gaadmailer",
+							"syntax": "Packages/Xdebug Client/Xdebug.tmLanguage",
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 181,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								181,
+								181
+							]
+						],
+						"settings":
+						{
+							"default_dir": "C:\\xampp7\\htdocs\\gm\\wp-content\\plugins\\gaadmailer",
+							"syntax": "Packages/Xdebug Client/Xdebug.tmLanguage",
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 39.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				2,
+				1
+			],
+			[
+				0,
+				1,
+				1,
+				2
+			],
+			[
+				1,
+				1,
+				2,
+				2
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			0.7,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.CSS Extended Completions":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.xdebug":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "gaadmailer.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"xdebug":
+		{
+			"hide_conflict": false,
+			"restore_index":
+			{
+				"49":
+				{
+					"group": 0,
+					"index": 0
+				},
+				"52":
+				{
+					"group": 0,
+					"index": 1
+				},
+				"53":
+				{
+					"group": 0,
+					"index": 2
+				}
+			},
+			"restore_layout":
+			{
+				"cells":
+				[
+					[
+						0,
+						0,
+						2,
+						1
+					],
+					[
+						0,
+						1,
+						1,
+						2
+					],
+					[
+						1,
+						1,
+						2,
+						2
+					]
+				],
+				"cols":
+				[
+					0.0,
+					0.5,
+					1.0
+				],
+				"rows":
+				[
+					0.0,
+					0.670776255708,
+					1.0
+				]
+			}
+		}
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 316.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
